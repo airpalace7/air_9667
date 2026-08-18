@@ -30,15 +30,10 @@ def fmt_val(v):
         total = v.total_seconds()
         neg = total < 0
         total = abs(total)
-        days = int(total // 86400)
-        rem = total - days * 86400
-        h = int(rem // 3600)
-        m = int((rem % 3600) // 60)
+        total_hours = int(total // 3600)
+        m = int((total % 3600) // 60)
         sign = "-" if neg else ""
-        if days > 0:
-            s = f"{sign}{days}일 {h:02d}:{m:02d}"
-        else:
-            s = f"{sign}{h:02d}:{m:02d}"
+        s = f"{sign}{total_hours}:{m:02d}"
         return s, neg
     if isinstance(v, (int, float)):
         neg = v < 0
