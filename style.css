@@ -86,7 +86,7 @@ nav.tabs a.active {
   font-size: 15px;
 }
 
-main { padding: 20px; max-width: 1400px; margin: 0 auto; }
+main { padding: 20px 28px; max-width: none; margin: 0; }
 
 .info-bar {
   display: grid;
