@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>메인 정비표 - HL9667</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="title">HL9667 <span>MAINT STATUS</span></div>
+  <nav class="tabs">
+    <a href="index.html">목차</a>
+    <a href="insp.html" class="active">01 메인정비표</a>
+    <a href="trp.html">02 기체부품</a>
+    <a href="eng1.html">03 #1엔진</a>
+    <a href="eng2.html">04 #2엔진</a>
+  </nav>
+</header>
+<main>
+  <div id="info" class="info-bar"></div>
+  <div id="content"><div class="loading">불러오는 중...</div></div>
+</main>
+<script>
+async function load() {
+  const res = await fetch('data/insp.json');
+  const data = await res.json();
+
+  const infoLabels = {
+    "등록기호": "등록기호", "TSN": "A/C TSN", "L/D": "L/D CYCLE",
+    "1ENG_TSN": "#1 ENG TSN", "2ENG_TSN": "#2 ENG TSN",
+    "1ENG_GG_CYC": "#1 GG CYC", "2ENG_GG_CYC": "#2 GG CYC",
+    "1ENG_PT_CYC": "#1 PT CYC", "2ENG_PT_CYC": "#2 PT CYC",
+    "DATE": "기준일"
+  };
+  const infoEl = document.getElementById('info');
+  infoEl.innerHTML = Object.entries(infoLabels).map(([k, label]) => `
+    <div class="info-cell">
+      <div class="k">${label}</div>
+      <div class="v">${data.info[k] ?? ''}</div>
+    </div>
+  `).join('');
+
+  const contentEl = document.getElementById('content');
+  if (!data.sections || data.sections.length === 0) {
+    contentEl.innerHTML = '<div class="empty">데이터가 없습니다.</div>';
+    return;
+  }
+
+  contentEl.innerHTML = data.sections.map(sec => `
+    <div class="section-title">${escapeHtml(sec.title)}</div>
+    <table>
+      <thead>
+        <tr>
+          <th>ITEM</th><th>INTERVAL DAY</th><th>INTERVAL TIME/CYC</th>
+          <th>PERFORMED DATE</th><th>PERFORMED A/C TIME</th>
+          <th>NEXT DUE DATE</th><th>NEXT DUE A/C TIME</th>
+          <th>REMAIN DAY</th><th>REMAIN TIME</th><th>REMARK</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${sec.rows.map(r => `
+          <tr class="${r.overdue ? 'overdue' : ''}">
+            <td>${escapeHtml(r.item)}${r.overdue ? '<span class="badge-overdue">초과</span>' : ''}</td>
+            <td>${escapeHtml(r.interval_day)}</td>
+            <td>${escapeHtml(r.interval_time)}</td>
+            <td>${escapeHtml(r.performed_date)}</td>
+            <td>${escapeHtml(r.performed_time)}</td>
+            <td>${escapeHtml(r.next_date)}</td>
+            <td>${escapeHtml(r.next_time)}</td>
+            <td>${escapeHtml(r.remain_day)}</td>
+            <td>${escapeHtml(r.remain_time)}</td>
+            <td class="remark">${escapeHtml(r.remark)}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `).join('');
+}
+
+function escapeHtml(s) {
+  if (s === null || s === undefined) return '';
+  return String(s).replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[c]));
+}
+
+load().catch(err => {
+  document.getElementById('content').innerHTML =
+    '<div class="empty">데이터를 불러오지 못했습니다: ' + err.message + '</div>';
+});
+</script>
+</body>
+</html>
