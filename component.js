@@ -13,8 +13,17 @@
     const res = await fetch(src);
     const data = await res.json();
 
+    const infoAll = data.info || [];
+    const todayItem = infoAll.find(it => it.label === 'Today');
+    const gridItems = infoAll.filter(it => it.label !== 'Today');
+
+    const dateEl = document.getElementById('headerDate');
+    if (dateEl) {
+      dateEl.innerHTML = '기준일<strong>' + escapeHtml(todayItem ? todayItem.value : '') + '</strong>';
+    }
+
     const infoEl = document.getElementById('info');
-    infoEl.innerHTML = (data.info || []).map(item => `
+    infoEl.innerHTML = gridItems.map(item => `
       <div class="info-cell">
         <div class="k">${escapeHtml(item.label)}</div>
         <div class="v">${escapeHtml(item.value)}</div>
