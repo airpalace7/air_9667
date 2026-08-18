@@ -70,7 +70,15 @@
     `;
   }
 
-  load().catch(err => {
+  function updateStickyOffsets() {
+    const header = document.querySelector('header.top');
+    const info = document.getElementById('info');
+    if (header) document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
+    if (info) document.documentElement.style.setProperty('--info-h', info.offsetHeight + 'px');
+  }
+  window.addEventListener('resize', updateStickyOffsets);
+
+  load().then(updateStickyOffsets).catch(err => {
     document.getElementById('content').innerHTML =
       '<div class="empty">데이터를 불러오지 못했습니다: ' + err.message + '</div>';
   });
