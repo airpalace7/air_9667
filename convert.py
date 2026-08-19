@@ -46,6 +46,10 @@ def is_dash_or_none(v):
     return v is None or (isinstance(v, str) and v.strip() == "-")
 
 
+def is_formula(v):
+    return isinstance(v, str) and v.startswith("=")
+
+
 def classify_row(ws_formula, r):
     """엑셀 수식을 보고 이 행이 표준 패턴(JS 재계산 가능)인지 판단."""
     f = ws_formula.cell(r, 6).value
@@ -145,6 +149,11 @@ def convert_insp(ws, ws_formula):
         overdue = isinstance(remain_day_raw, (int, float)) and remain_day_raw < 0
 
         recalculable, tsn_base = classify_row(ws_formula, r)
+        # D열(PERFORMED DATE)/E열(PERFORMED A/C TIME) 자체가 다른 행을 참조하는 수식이면
+        # (예: =D41) 그 항목은 독립적으로 입력하는 값이 아니라 다른 행의 값을 그대로 따라가는
+        # 것이므로 웹에서 직접 수정할 수 없게 한다. 그 외에는(원본이 raw 값이면) 편집 가능.
+        performed_date_editable = not is_formula(ws_formula.cell(r, 4).value)
+        performed_time_editable = not is_formula(ws_formula.cell(r, 5).value)
         cur["rows"].append({
             "item": item,
             "interval_day": interval_day,
@@ -159,6 +168,8 @@ def convert_insp(ws, ws_formula):
             "overdue": overdue,
             "recalc": recalculable,
             "tsn_base": tsn_base,
+            "performed_date_editable": performed_date_editable,
+            "performed_time_editable": performed_time_editable,
             "interval_day_num": interval_day_raw if isinstance(interval_day_raw, (int, float)) else None,
             "interval_time_hours": hours_of(interval_time_raw),
             "performed_date_iso": date_iso(performed_date_raw),

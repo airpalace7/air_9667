@@ -64,12 +64,47 @@ function hoursToStr(h) {
   return (neg ? '-' : '') + totalHours + ':' + String(mins).padStart(2, '0');
 }
 
+// "1234:56" 같은 hhhh:mm 문자열을 소수 시간(1234.9333...)으로 변환.
+// 순수 숫자(예: "1234.5")를 입력해도 그대로 허용한다. 파싱 불가하면 NaN.
+function parseHoursStr(s) {
+  if (s === null || s === undefined) return NaN;
+  s = String(s).trim();
+  if (s === '' || s === '-') return NaN;
+  const neg = s.startsWith('-');
+  if (neg) s = s.slice(1);
+  const m = s.match(/^(\d+):([0-5]?\d)$/);
+  if (m) {
+    const h = parseInt(m[1], 10);
+    const mm = parseInt(m[2], 10);
+    return (neg ? -1 : 1) * (h + mm / 60);
+  }
+  const f = parseFloat(s);
+  return isNaN(f) ? NaN : (neg ? -1 : 1) * Math.abs(f);
+}
+
 function isoDate(d) {
   return d.toISOString().slice(0, 10);
 }
 
 function recomputeRow(row, raw) {
-  if (!row.recalc) return;
+  // 관리자 모드에서 수정한 실제값(iso/hours)을 화면 표시용 문자열에도 동기화
+  // (이걸 안 하면 관리자 모드를 껐을 때 예전 값이 그대로 보이는 불일치가 생김)
+  // NEXT/REMAIN을 자동 재계산하지 않는 항목("엑셀관리")이라도 PERFORMED DATE/TIME,
+  // INTERVAL DAY/TIME은 raw 입력값이므로 항상 동기화한다.
+  if (row.performed_date_iso) {
+    row.performed_date = row.performed_date_iso;
+  }
+  if (row.performed_time_hours !== null && row.performed_time_hours !== undefined && !isNaN(row.performed_time_hours)) {
+    row.performed_time = hoursToStr(row.performed_time_hours);
+  }
+  if (row.interval_day_num !== null && row.interval_day_num !== undefined && !isNaN(row.interval_day_num)) {
+    row.interval_day = String(row.interval_day_num);
+  }
+  if (row.interval_time_hours !== null && row.interval_time_hours !== undefined && !isNaN(row.interval_time_hours)) {
+    row.interval_time = hoursToStr(row.interval_time_hours);
+  }
+
+  if (!row.recalc) return; // NEXT DUE/REMAIN은 엑셀에서 계산한 값을 그대로 유지("엑셀관리")
 
   let nextDateVal = null;
   if (row.interval_day_num !== null && row.interval_day_num !== undefined && row.performed_date_iso) {
@@ -187,16 +222,16 @@ function renderContent() {
       <tbody>
         ${sec.rows.map((r, ri) => `
           <tr class="${r.overdue ? 'overdue' : ''}">
-            <td>${escapeHtml(r.item)}${r.overdue ? '<span class="badge-overdue">초과</span>' : ''}${(ADMIN && !r.recalc) ? '<span class="badge-manual">엑셀관리</span>' : ''}</td>
-            <td>${escapeHtml(r.interval_day)}</td>
-            <td>${escapeHtml(r.interval_time)}</td>
-            <td>${ADMIN && r.recalc && r.interval_day_num !== null ? `<input type="date" class="cell-input" data-si="${si}" data-ri="${ri}" data-field="performed_date_iso" value="${r.performed_date_iso || ''}">` : escapeHtml(r.performed_date)}</td>
-            <td>${ADMIN && r.recalc && r.interval_time_hours !== null ? `<input type="number" step="0.01" class="cell-input" data-si="${si}" data-ri="${ri}" data-field="performed_time_hours" value="${r.performed_time_hours ?? ''}">` : escapeHtml(r.performed_time)}</td>
+            <td>${escapeHtml(r.item)}${r.overdue ? '<span class="badge-overdue">초과</span>' : ''}${(ADMIN && !r.recalc) ? '<span class="badge-manual" title="다음 예정일/잔여시간은 자동 계산되지 않아요. 엑셀에서 관리하세요.">엑셀관리</span>' : ''}</td>
+            <td>${ADMIN ? `<input type="number" step="1" class="cell-input" data-si="${si}" data-ri="${ri}" data-field="interval_day_num" value="${r.interval_day_num ?? ''}">` : escapeHtml(r.interval_day)}</td>
+            <td>${ADMIN ? `<input type="text" placeholder="hhhh:mm" pattern="-?\\d+:[0-5]?\\d" class="cell-input" data-si="${si}" data-ri="${ri}" data-field="interval_time_hours" value="${r.interval_time_hours !== null && r.interval_time_hours !== undefined ? hoursToStr(r.interval_time_hours) : ''}">` : escapeHtml(r.interval_time)}</td>
+            <td>${ADMIN && r.performed_date_editable ? `<input type="date" class="cell-input" data-si="${si}" data-ri="${ri}" data-field="performed_date_iso" value="${r.performed_date_iso || ''}">` : (ADMIN ? `<span class="locked-cell" title="다른 항목과 연동된 값이라 여기서 수정할 수 없어요.">${escapeHtml(r.performed_date)}</span>` : escapeHtml(r.performed_date))}</td>
+            <td>${ADMIN && r.performed_time_editable ? `<input type="text" placeholder="hhhh:mm" pattern="-?\\d+:[0-5]?\\d" class="cell-input" data-si="${si}" data-ri="${ri}" data-field="performed_time_hours" value="${r.performed_time_hours !== null && r.performed_time_hours !== undefined ? hoursToStr(r.performed_time_hours) : ''}">` : (ADMIN ? `<span class="locked-cell" title="다른 항목과 연동된 값이라 여기서 수정할 수 없어요.">${escapeHtml(r.performed_time)}</span>` : escapeHtml(r.performed_time))}</td>
             <td>${escapeHtml(r.next_date)}</td>
             <td>${escapeHtml(r.next_time)}</td>
             <td>${escapeHtml(r.remain_day)}</td>
             <td>${escapeHtml(r.remain_time)}</td>
-            <td class="remark">${escapeHtml(r.remark)}</td>
+            <td class="remark">${ADMIN ? `<input type="text" class="cell-input" data-si="${si}" data-ri="${ri}" data-field="remark" value="${escapeHtml(r.remark || '')}">` : escapeHtml(r.remark)}</td>
           </tr>
         `).join('')}
       </tbody>
@@ -205,10 +240,17 @@ function renderContent() {
 
   if (ADMIN) {
     contentEl.querySelectorAll('.cell-input').forEach(inp => {
-      inp.addEventListener('input', e => {
+      inp.addEventListener('change', e => {
         const si = +e.target.dataset.si, ri = +e.target.dataset.ri, field = e.target.dataset.field;
         const row = DATA.sections[si].rows[ri];
-        row[field] = field === 'performed_time_hours' ? parseFloat(e.target.value) : e.target.value;
+        const raw = e.target.value;
+        if (field === 'performed_time_hours' || field === 'interval_time_hours') {
+          row[field] = raw.trim() === '' ? null : parseHoursStr(raw);
+        } else if (field === 'interval_day_num') {
+          row[field] = raw.trim() === '' ? null : parseInt(raw, 10);
+        } else {
+          row[field] = raw; // performed_date_iso, remark
+        }
         recomputeAll();
         renderContent();
         renderInfo();
@@ -240,6 +282,7 @@ window.addEventListener('resize', updateStickyOffsets);
 async function load() {
   const res = await fetch('data/insp.json');
   DATA = await res.json();
+  recomputeAll(); // 이전에 저장된 표시용 필드(performed_date 등)와 실제값 불일치를 로드 시점에 자동 보정
   renderInfo();
   renderContent();
 }

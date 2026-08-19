@@ -281,6 +281,12 @@ tbody td.remark {
 }
 .cell-input:focus { border-color: var(--accent); outline: none; }
 
+.locked-cell {
+  opacity: 0.6;
+  cursor: not-allowed;
+  border-bottom: 1px dashed var(--border);
+}
+
 .save-bar {
   position: sticky;
   bottom: 0;
