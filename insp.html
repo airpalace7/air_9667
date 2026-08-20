@@ -174,9 +174,9 @@ function renderMasterForm() {
     <div class="master-title">기준값 수정 (비행시간 추가 시 여기 갱신)</div>
     <div class="master-row">
       <label>기준일<input type="date" id="m_today" value="${DATA.raw.today || ''}"></label>
-      <label>A/C TSN(시간)<input type="number" step="0.01" id="m_ac" value="${DATA.raw.ac_tsn_hours ?? ''}"></label>
-      <label>#1 ENG TSN(시간)<input type="number" step="0.01" id="m_eng1" value="${DATA.raw.eng1_tsn_hours ?? ''}"></label>
-      <label>#2 ENG TSN(시간)<input type="number" step="0.01" id="m_eng2" value="${DATA.raw.eng2_tsn_hours ?? ''}"></label>
+      <label>A/C TSN<input type="text" placeholder="hhhh:mm" id="m_ac" value="${hoursToStr(DATA.raw.ac_tsn_hours)}"></label>
+      <label>#1 ENG TSN<input type="text" placeholder="hhhh:mm" id="m_eng1" value="${hoursToStr(DATA.raw.eng1_tsn_hours)}"></label>
+      <label>#2 ENG TSN<input type="text" placeholder="hhhh:mm" id="m_eng2" value="${hoursToStr(DATA.raw.eng2_tsn_hours)}"></label>
     </div>
   `;
   document.getElementById('m_today').addEventListener('change', e => {
@@ -184,18 +184,18 @@ function renderMasterForm() {
     DATA.info.DATE = e.target.value;
     onDataChanged();
   });
-  document.getElementById('m_ac').addEventListener('input', e => {
-    DATA.raw.ac_tsn_hours = parseFloat(e.target.value);
+  document.getElementById('m_ac').addEventListener('change', e => {
+    DATA.raw.ac_tsn_hours = parseHoursStr(e.target.value);
     DATA.info.TSN = hoursToStr(DATA.raw.ac_tsn_hours);
     onDataChanged();
   });
-  document.getElementById('m_eng1').addEventListener('input', e => {
-    DATA.raw.eng1_tsn_hours = parseFloat(e.target.value);
+  document.getElementById('m_eng1').addEventListener('change', e => {
+    DATA.raw.eng1_tsn_hours = parseHoursStr(e.target.value);
     DATA.info['1ENG_TSN'] = hoursToStr(DATA.raw.eng1_tsn_hours);
     onDataChanged();
   });
-  document.getElementById('m_eng2').addEventListener('input', e => {
-    DATA.raw.eng2_tsn_hours = parseFloat(e.target.value);
+  document.getElementById('m_eng2').addEventListener('change', e => {
+    DATA.raw.eng2_tsn_hours = parseHoursStr(e.target.value);
     DATA.info['2ENG_TSN'] = hoursToStr(DATA.raw.eng2_tsn_hours);
     onDataChanged();
   });
@@ -210,7 +210,7 @@ function renderContent() {
 
   contentEl.innerHTML = DATA.sections.map((sec, si) => `
     <div class="section-title">${escapeHtml(sec.title)}</div>
-    <table>
+    <table class="insp-table">
       <thead>
         <tr>
           <th>ITEM</th><th>INTERVAL DAY</th><th>INTERVAL TIME/CYC</th>
@@ -220,11 +220,31 @@ function renderContent() {
         </tr>
       </thead>
       <tbody>
-        ${sec.rows.map((r, ri) => `
+        ${sec.rows.map((r, ri) => {
+          if (r.date_log) {
+            // "CARGO HOOK - REMOVED DATE"처럼 제거일/재장착일 쌍을 여러 줄 기록하는 특수 행
+            const header = `
+              <tr>
+                <td>${escapeHtml(r.item)}</td>
+                <td></td><td></td>
+                <td><strong>${escapeHtml(r.performed_date)}</strong></td>
+                <td><strong>${escapeHtml(r.performed_time)}</strong></td>
+                <td></td><td></td><td></td><td></td><td class="remark">${escapeHtml(r.remark)}</td>
+              </tr>`;
+            const logRows = (r.log_entries || []).map((log, li) => `
+              <tr class="log-row">
+                <td></td><td></td><td></td>
+                <td>${ADMIN ? `<input type="date" class="cell-input" data-si="${si}" data-ri="${ri}" data-logidx="${li}" data-field="removed_date_iso" value="${log.removed_date_iso || ''}">` : escapeHtml(log.removed_date_iso || '')}</td>
+                <td>${ADMIN ? `<input type="date" class="cell-input" data-si="${si}" data-ri="${ri}" data-logidx="${li}" data-field="reinstalled_date_iso" value="${log.reinstalled_date_iso || ''}">` : escapeHtml(log.reinstalled_date_iso || '')}</td>
+                <td></td><td></td><td></td><td></td><td></td>
+              </tr>`).join('');
+            return header + logRows;
+          }
+          return `
           <tr class="${r.overdue ? 'overdue' : ''}">
             <td>${escapeHtml(r.item)}${r.overdue ? '<span class="badge-overdue">초과</span>' : ''}${(ADMIN && !r.recalc) ? '<span class="badge-manual" title="다음 예정일/잔여시간은 자동 계산되지 않아요. 엑셀에서 관리하세요.">엑셀관리</span>' : ''}</td>
-            <td>${ADMIN ? `<input type="number" step="1" class="cell-input" data-si="${si}" data-ri="${ri}" data-field="interval_day_num" value="${r.interval_day_num ?? ''}">` : escapeHtml(r.interval_day)}</td>
-            <td>${ADMIN ? `<input type="text" placeholder="hhhh:mm" pattern="-?\\d+:[0-5]?\\d" class="cell-input" data-si="${si}" data-ri="${ri}" data-field="interval_time_hours" value="${r.interval_time_hours !== null && r.interval_time_hours !== undefined ? hoursToStr(r.interval_time_hours) : ''}">` : escapeHtml(r.interval_time)}</td>
+            <td>${escapeHtml(r.interval_day)}</td>
+            <td>${escapeHtml(r.interval_time)}</td>
             <td>${ADMIN && r.performed_date_editable ? `<input type="date" class="cell-input" data-si="${si}" data-ri="${ri}" data-field="performed_date_iso" value="${r.performed_date_iso || ''}">` : (ADMIN ? `<span class="locked-cell" title="다른 항목과 연동된 값이라 여기서 수정할 수 없어요.">${escapeHtml(r.performed_date)}</span>` : escapeHtml(r.performed_date))}</td>
             <td>${ADMIN && r.performed_time_editable ? `<input type="text" placeholder="hhhh:mm" pattern="-?\\d+:[0-5]?\\d" class="cell-input" data-si="${si}" data-ri="${ri}" data-field="performed_time_hours" value="${r.performed_time_hours !== null && r.performed_time_hours !== undefined ? hoursToStr(r.performed_time_hours) : ''}">` : (ADMIN ? `<span class="locked-cell" title="다른 항목과 연동된 값이라 여기서 수정할 수 없어요.">${escapeHtml(r.performed_time)}</span>` : escapeHtml(r.performed_time))}</td>
             <td>${escapeHtml(r.next_date)}</td>
@@ -232,8 +252,8 @@ function renderContent() {
             <td>${escapeHtml(r.remain_day)}</td>
             <td>${escapeHtml(r.remain_time)}</td>
             <td class="remark">${ADMIN ? `<input type="text" class="cell-input" data-si="${si}" data-ri="${ri}" data-field="remark" value="${escapeHtml(r.remark || '')}">` : escapeHtml(r.remark)}</td>
-          </tr>
-        `).join('')}
+          </tr>`;
+        }).join('')}
       </tbody>
     </table>
   `).join('');
@@ -244,10 +264,11 @@ function renderContent() {
         const si = +e.target.dataset.si, ri = +e.target.dataset.ri, field = e.target.dataset.field;
         const row = DATA.sections[si].rows[ri];
         const raw = e.target.value;
-        if (field === 'performed_time_hours' || field === 'interval_time_hours') {
+        if (e.target.dataset.logidx !== undefined) {
+          const li = +e.target.dataset.logidx;
+          row.log_entries[li][field] = raw.trim() === '' ? null : raw;
+        } else if (field === 'performed_time_hours') {
           row[field] = raw.trim() === '' ? null : parseHoursStr(raw);
-        } else if (field === 'interval_day_num') {
-          row[field] = raw.trim() === '' ? null : parseInt(raw, 10);
         } else {
           row[field] = raw; // performed_date_iso, remark
         }

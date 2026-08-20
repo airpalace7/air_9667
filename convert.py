@@ -118,16 +118,27 @@ def convert_insp(ws, ws_formula):
     }
     sections = []
     cur = None
+    pending_log_row = None  # "CARGO HOOK - REMOVED DATE" 같은 로그형 항목 뒤에 오는 빈 행들을 담을 곳
     for r in range(7, ws.max_row + 1):
         a = ws.cell(r, 1).value
         b = ws.cell(r, 2).value
         if a and isinstance(a, str) and a.strip().startswith("▶"):
             cur = {"title": a.strip(), "rows": []}
             sections.append(cur)
+            pending_log_row = None
             continue
         if cur is None:
             continue
         if a is None and b is None:
+            # item 칸이 비어있는 행. 바로 위가 "날짜 로그" 헤더 행이었다면(예: CARGO HOOK -
+            # REMOVED DATE), 이 행의 D/E열을 제거일/재장착일 한 쌍으로 로그에 추가한다.
+            if pending_log_row is not None:
+                removed = date_iso(ws.cell(r, 4).value)
+                reinstalled = date_iso(ws.cell(r, 5).value)
+                pending_log_row["log_entries"].append({
+                    "removed_date_iso": removed,
+                    "reinstalled_date_iso": reinstalled,
+                })
             continue
         item = fmt_val(a)[0]
         if not item:
@@ -154,7 +165,15 @@ def convert_insp(ws, ws_formula):
         # 것이므로 웹에서 직접 수정할 수 없게 한다. 그 외에는(원본이 raw 값이면) 편집 가능.
         performed_date_editable = not is_formula(ws_formula.cell(r, 4).value)
         performed_time_editable = not is_formula(ws_formula.cell(r, 5).value)
-        cur["rows"].append({
+
+        # "CARGO HOOK - REMOVED DATE"처럼 D/E열이 실제 값이 아니라 "제거일"/"재장착일" 같은
+        # 열 라벨로 쓰이는 헤더 행: 그 자체는 입력칸이 아니므로 편집 불가로 두고, 뒤따르는
+        # 빈 행들을 로그 항목으로 모은다.
+        is_date_log = isinstance(performed_date_raw, str) and isinstance(performed_time_raw, str) \
+            and not is_formula(performed_date_raw) and not is_formula(performed_time_raw) \
+            and performed_date_raw.strip() != "" and performed_time_raw.strip() != ""
+
+        row_obj = {
             "item": item,
             "interval_day": interval_day,
             "interval_time": interval_time,
@@ -168,13 +187,20 @@ def convert_insp(ws, ws_formula):
             "overdue": overdue,
             "recalc": recalculable,
             "tsn_base": tsn_base,
-            "performed_date_editable": performed_date_editable,
-            "performed_time_editable": performed_time_editable,
+            "performed_date_editable": False if is_date_log else performed_date_editable,
+            "performed_time_editable": False if is_date_log else performed_time_editable,
             "interval_day_num": interval_day_raw if isinstance(interval_day_raw, (int, float)) else None,
             "interval_time_hours": hours_of(interval_time_raw),
-            "performed_date_iso": date_iso(performed_date_raw),
-            "performed_time_hours": hours_of(performed_time_raw),
-        })
+            "performed_date_iso": None if is_date_log else date_iso(performed_date_raw),
+            "performed_time_hours": None if is_date_log else hours_of(performed_time_raw),
+        }
+        if is_date_log:
+            row_obj["date_log"] = True
+            row_obj["log_entries"] = []
+            pending_log_row = row_obj
+        else:
+            pending_log_row = None
+        cur["rows"].append(row_obj)
     return {"info": info, "raw": raw, "sections": sections}
 
 

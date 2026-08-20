@@ -1,12 +1,12 @@
 :root {
-  --bg: #0f1720;
-  --panel: #161f2b;
-  --panel-2: #1c2733;
-  --border: #2a3644;
-  --text: #dfe7ee;
-  --text-dim: #8fa1b3;
-  --accent: #4fa3d1;
-  --accent-2: #f0a93a;
+  --bg: #ffffff;
+  --panel: #ffffff;
+  --panel-2: #f0f0f0;
+  --border: #d5d5d5;
+  --text: #000000;
+  --text-dim: #4a4a4a;
+  --accent: #2f6fa3;
+  --accent-2: #b06a00;
   --danger: #e0554f;
   --danger-bg: rgba(224, 85, 79, 0.14);
   --mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
@@ -158,6 +158,10 @@ tbody td.remark {
   color: var(--text-dim);
   min-width: 200px;
 }
+.insp-table td:nth-child(n+2):nth-child(-n+9) {
+  text-align: center;
+}
+.log-row td { border-bottom: 1px dashed var(--border); }
 .badge-overdue {
   display: inline-block;
   font-family: var(--sans);
