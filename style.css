@@ -285,10 +285,27 @@ tbody td.remark {
 }
 .cell-input:focus { border-color: var(--accent); outline: none; }
 
+.remark-input {
+  font-family: var(--sans) !important;
+  font-size: 15px !important;
+  color: var(--text) !important;
+  min-width: 200px;
+  min-height: 34px;
+  resize: vertical;
+  white-space: normal;
+  line-height: 1.4;
+}
+
 .locked-cell {
   opacity: 0.6;
   cursor: not-allowed;
   border-bottom: 1px dashed var(--border);
+}
+
+.ref-hint {
+  color: var(--accent);
+  font-family: var(--sans);
+  font-size: 11px;
 }
 
 .save-bar {

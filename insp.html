@@ -82,6 +82,27 @@ function parseHoursStr(s) {
   return isNaN(f) ? NaN : (neg ? -1 : 1) * Math.abs(f);
 }
 
+// "2026-3-19" 처럼 구분자/자릿수가 느슨해도 "YYYY-MM-DD"로 정규화. 파싱 불가하면 null.
+function parseDateStr(s) {
+  if (s === null || s === undefined) return null;
+  s = String(s).trim();
+  if (s === '') return null;
+  const m = s.match(/^(\d{4})[-./](\d{1,2})[-./](\d{1,2})$/);
+  if (!m) return null;
+  const mm = m[2].padStart(2, '0');
+  const dd = m[3].padStart(2, '0');
+  return `${m[1]}-${mm}-${dd}`;
+}
+
+function lockedCellHtml(valueText, ref) {
+  // ref가 있으면(다른 행의 D/E를 그대로 참조하는 단순 수식) 어떤 항목을 참조하는지 표시.
+  // ref가 없으면(참조가 아니라 엑셀에 상수 계산식으로 들어간 값) 그 취지를 안내.
+  if (ref) {
+    return `<span class="locked-cell" title="'${escapeHtml(ref.item)}' 항목(엑셀 ${ref.row}행)과 같은 값이에요. 그 항목의 값을 바꾸면 여기도 함께 바뀌어요.">${escapeHtml(valueText)}<br><small class="ref-hint">→ ${escapeHtml(ref.item)}</small></span>`;
+  }
+  return `<span class="locked-cell" title="엑셀에 계산식(상수)으로 입력된 값이라 여기서 수정할 수 없어요. 엑셀에서 직접 고친 뒤 다시 변환해주세요.">${escapeHtml(valueText)}</span>`;
+}
+
 function isoDate(d) {
   return d.toISOString().slice(0, 10);
 }
@@ -173,15 +194,18 @@ function renderMasterForm() {
   el.innerHTML = `
     <div class="master-title">기준값 수정 (비행시간 추가 시 여기 갱신)</div>
     <div class="master-row">
-      <label>기준일<input type="date" id="m_today" value="${DATA.raw.today || ''}"></label>
+      <label>기준일<input type="text" placeholder="yyyy-mm-dd" id="m_today" value="${DATA.raw.today || ''}"></label>
       <label>A/C TSN<input type="text" placeholder="hhhh:mm" id="m_ac" value="${hoursToStr(DATA.raw.ac_tsn_hours)}"></label>
       <label>#1 ENG TSN<input type="text" placeholder="hhhh:mm" id="m_eng1" value="${hoursToStr(DATA.raw.eng1_tsn_hours)}"></label>
       <label>#2 ENG TSN<input type="text" placeholder="hhhh:mm" id="m_eng2" value="${hoursToStr(DATA.raw.eng2_tsn_hours)}"></label>
     </div>
   `;
   document.getElementById('m_today').addEventListener('change', e => {
-    DATA.raw.today = e.target.value;
-    DATA.info.DATE = e.target.value;
+    const iso = parseDateStr(e.target.value);
+    if (iso) {
+      DATA.raw.today = iso;
+      DATA.info.DATE = iso;
+    }
     onDataChanged();
   });
   document.getElementById('m_ac').addEventListener('change', e => {
@@ -234,8 +258,8 @@ function renderContent() {
             const logRows = (r.log_entries || []).map((log, li) => `
               <tr class="log-row">
                 <td></td><td></td><td></td>
-                <td>${ADMIN ? `<input type="date" class="cell-input" data-si="${si}" data-ri="${ri}" data-logidx="${li}" data-field="removed_date_iso" value="${log.removed_date_iso || ''}">` : escapeHtml(log.removed_date_iso || '')}</td>
-                <td>${ADMIN ? `<input type="date" class="cell-input" data-si="${si}" data-ri="${ri}" data-logidx="${li}" data-field="reinstalled_date_iso" value="${log.reinstalled_date_iso || ''}">` : escapeHtml(log.reinstalled_date_iso || '')}</td>
+                <td>${ADMIN ? `<input type="text" placeholder="yyyy-mm-dd" class="cell-input" data-si="${si}" data-ri="${ri}" data-logidx="${li}" data-field="removed_date_iso" value="${log.removed_date_iso || ''}">` : escapeHtml(log.removed_date_iso || '')}</td>
+                <td>${ADMIN ? `<input type="text" placeholder="yyyy-mm-dd" class="cell-input" data-si="${si}" data-ri="${ri}" data-logidx="${li}" data-field="reinstalled_date_iso" value="${log.reinstalled_date_iso || ''}">` : escapeHtml(log.reinstalled_date_iso || '')}</td>
                 <td></td><td></td><td></td><td></td><td></td>
               </tr>`).join('');
             return header + logRows;
@@ -245,13 +269,13 @@ function renderContent() {
             <td>${escapeHtml(r.item)}${r.overdue ? '<span class="badge-overdue">초과</span>' : ''}${(ADMIN && !r.recalc) ? '<span class="badge-manual" title="다음 예정일/잔여시간은 자동 계산되지 않아요. 엑셀에서 관리하세요.">엑셀관리</span>' : ''}</td>
             <td>${escapeHtml(r.interval_day)}</td>
             <td>${escapeHtml(r.interval_time)}</td>
-            <td>${ADMIN && r.performed_date_editable ? `<input type="date" class="cell-input" data-si="${si}" data-ri="${ri}" data-field="performed_date_iso" value="${r.performed_date_iso || ''}">` : (ADMIN ? `<span class="locked-cell" title="다른 항목과 연동된 값이라 여기서 수정할 수 없어요.">${escapeHtml(r.performed_date)}</span>` : escapeHtml(r.performed_date))}</td>
-            <td>${ADMIN && r.performed_time_editable ? `<input type="text" placeholder="hhhh:mm" pattern="-?\\d+:[0-5]?\\d" class="cell-input" data-si="${si}" data-ri="${ri}" data-field="performed_time_hours" value="${r.performed_time_hours !== null && r.performed_time_hours !== undefined ? hoursToStr(r.performed_time_hours) : ''}">` : (ADMIN ? `<span class="locked-cell" title="다른 항목과 연동된 값이라 여기서 수정할 수 없어요.">${escapeHtml(r.performed_time)}</span>` : escapeHtml(r.performed_time))}</td>
+            <td>${ADMIN && r.performed_date_editable ? `<input type="text" placeholder="yyyy-mm-dd" class="cell-input" data-si="${si}" data-ri="${ri}" data-field="performed_date_iso" value="${r.performed_date_iso || ''}">` : (ADMIN ? lockedCellHtml(r.performed_date, r.performed_date_ref) : escapeHtml(r.performed_date))}</td>
+            <td>${ADMIN && r.performed_time_editable ? `<input type="text" placeholder="hhhh:mm" pattern="-?\\d+:[0-5]?\\d" class="cell-input" data-si="${si}" data-ri="${ri}" data-field="performed_time_hours" value="${r.performed_time_hours !== null && r.performed_time_hours !== undefined ? hoursToStr(r.performed_time_hours) : ''}">` : (ADMIN ? lockedCellHtml(r.performed_time, r.performed_time_ref) : escapeHtml(r.performed_time))}</td>
             <td>${escapeHtml(r.next_date)}</td>
             <td>${escapeHtml(r.next_time)}</td>
             <td>${escapeHtml(r.remain_day)}</td>
             <td>${escapeHtml(r.remain_time)}</td>
-            <td class="remark">${ADMIN ? `<input type="text" class="cell-input" data-si="${si}" data-ri="${ri}" data-field="remark" value="${escapeHtml(r.remark || '')}">` : escapeHtml(r.remark)}</td>
+            <td class="remark">${ADMIN ? `<textarea rows="1" class="cell-input remark-input" data-si="${si}" data-ri="${ri}" data-field="remark">${escapeHtml(r.remark || '')}</textarea>` : escapeHtml(r.remark)}</td>
           </tr>`;
         }).join('')}
       </tbody>
@@ -266,11 +290,13 @@ function renderContent() {
         const raw = e.target.value;
         if (e.target.dataset.logidx !== undefined) {
           const li = +e.target.dataset.logidx;
-          row.log_entries[li][field] = raw.trim() === '' ? null : raw;
+          row.log_entries[li][field] = raw.trim() === '' ? null : parseDateStr(raw);
         } else if (field === 'performed_time_hours') {
           row[field] = raw.trim() === '' ? null : parseHoursStr(raw);
+        } else if (field === 'performed_date_iso') {
+          row[field] = raw.trim() === '' ? null : parseDateStr(raw);
         } else {
-          row[field] = raw; // performed_date_iso, remark
+          row[field] = raw; // remark
         }
         recomputeAll();
         renderContent();

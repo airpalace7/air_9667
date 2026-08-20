@@ -42,6 +42,21 @@ TSN_BASE_RE = {
 }
 
 
+CELL_REF_RE = re.compile(r"^=([A-Z]+)(\d+)$")
+
+
+def ref_info(ws, formula_val):
+    """'=D41' 같은 단순 셀 참조 수식이면 참조 대상 행/항목명을 돌려준다. 아니면 None."""
+    if not isinstance(formula_val, str):
+        return None
+    m = CELL_REF_RE.match(formula_val)
+    if not m:
+        return None
+    ref_row = int(m.group(2))
+    ref_item = fmt_val(ws.cell(ref_row, 1).value)[0]
+    return {"row": ref_row, "item": ref_item}
+
+
 def is_dash_or_none(v):
     return v is None or (isinstance(v, str) and v.strip() == "-")
 
@@ -165,6 +180,8 @@ def convert_insp(ws, ws_formula):
         # 것이므로 웹에서 직접 수정할 수 없게 한다. 그 외에는(원본이 raw 값이면) 편집 가능.
         performed_date_editable = not is_formula(ws_formula.cell(r, 4).value)
         performed_time_editable = not is_formula(ws_formula.cell(r, 5).value)
+        performed_date_ref = ref_info(ws, ws_formula.cell(r, 4).value)
+        performed_time_ref = ref_info(ws, ws_formula.cell(r, 5).value)
 
         # "CARGO HOOK - REMOVED DATE"처럼 D/E열이 실제 값이 아니라 "제거일"/"재장착일" 같은
         # 열 라벨로 쓰이는 헤더 행: 그 자체는 입력칸이 아니므로 편집 불가로 두고, 뒤따르는
@@ -189,6 +206,8 @@ def convert_insp(ws, ws_formula):
             "tsn_base": tsn_base,
             "performed_date_editable": False if is_date_log else performed_date_editable,
             "performed_time_editable": False if is_date_log else performed_time_editable,
+            "performed_date_ref": None if is_date_log else performed_date_ref,
+            "performed_time_ref": None if is_date_log else performed_time_ref,
             "interval_day_num": interval_day_raw if isinstance(interval_day_raw, (int, float)) else None,
             "interval_time_hours": hours_of(interval_time_raw),
             "performed_date_iso": None if is_date_log else date_iso(performed_date_raw),
