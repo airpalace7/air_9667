@@ -731,7 +731,7 @@
         },
         {
           "item": "30 D",
-          "interval_day": "1900-01-30",
+          "interval_day": "30",
           "interval_time": "-",
           "performed_date": "2026-06-10",
           "performed_time": "6531:08",
