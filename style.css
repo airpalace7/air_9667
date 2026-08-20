@@ -156,8 +156,8 @@ main { padding: 20px 28px; max-width: none; margin: 0; }
   font-size: 16.5px;
   color: var(--accent-2);
   font-weight: 700;
-  margin: 26px 0 8px;
-  padding-bottom: 6px;
+  margin: 0;
+  padding: 26px 0 8px;
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: calc(var(--header-h) + var(--info-h));
@@ -437,15 +437,32 @@ tbody td.remark {
 }
 
 @media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
   header.top, #connectPanel, #masterForm, .save-bar, .print-wrap { display: none !important; }
+  .insp-table td:nth-child(10), .insp-table th:nth-child(10) { display: none !important; }
   .print-header {
     display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     font-family: var(--mono);
     font-weight: 700;
-    font-size: 18px;
-    margin: 0 0 12px;
+    font-size: 14px;
+    padding: 4px 0;
+    background: #fff;
+    z-index: 100;
   }
-  #info { position: static !important; }
+  #info {
+    position: fixed;
+    top: 22px;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background: #fff;
+    margin-bottom: 0;
+  }
+  main { margin-top: 92px; }
   .section-title, .insp-table thead th { position: static !important; }
   .section-block.print-exclude { display: none !important; }
   body { font-size: 11px; }
@@ -453,4 +470,22 @@ tbody td.remark {
   .insp-table tbody td, .insp-table thead th { padding: 4px 6px; white-space: normal; }
   .section-block { page-break-inside: avoid; }
   .locked-cell, .ref-hint, .badge-manual { display: inline; }
+  tbody tr.overdue { background: var(--danger-bg) !important; }
+  tbody tr.overdue td:first-child { box-shadow: inset 3px 0 0 var(--danger) !important; }
+  .info-bar {
+    display: flex !important;
+    flex-wrap: nowrap;
+    background: #fff !important;
+    border: none;
+    border-radius: 0;
+    gap: 0;
+  }
+  .info-cell {
+    padding: 2px 8px;
+    border-right: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .info-cell:last-child { border-right: none; }
+  .info-cell .k { font-size: 8px; margin-bottom: 0; }
+  .info-cell .v { font-size: 11px; }
 }
