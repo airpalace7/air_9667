@@ -23,6 +23,7 @@ html, body {
   font-size: 17px;
   --header-h: 60px;
   --info-h: 84px;
+  --section-h: 40px;
 }
 
 a { color: var(--accent); text-decoration: none; }
@@ -88,6 +89,47 @@ nav.tabs a.active {
   font-size: 15px;
 }
 
+.print-wrap { position: relative; }
+.print-btn {
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-dim);
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.print-btn:hover { color: var(--text); border-color: var(--accent); }
+.print-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 40;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  min-width: 320px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+.print-panel-title { font-size: 12px; color: var(--text-dim); margin-bottom: 8px; }
+#printSectionList { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; max-height: 240px; overflow-y: auto; }
+.print-check { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--text); }
+.print-panel button#printGoBtn {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+}
+
+.print-header { display: none; }
+
 main { padding: 20px 28px; max-width: none; margin: 0; }
 
 .info-bar {
@@ -117,6 +159,10 @@ main { padding: 20px 28px; max-width: none; margin: 0; }
   margin: 26px 0 8px;
   padding-bottom: 6px;
   border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: calc(var(--header-h) + var(--info-h));
+  z-index: 21;
+  background: var(--bg);
 }
 
 table {
@@ -140,7 +186,7 @@ thead th {
   border-bottom: 1px solid var(--border);
   white-space: nowrap;
   position: sticky;
-  top: calc(var(--header-h) + var(--info-h));
+  top: calc(var(--header-h) + var(--info-h) + var(--section-h));
   z-index: 20;
 }
 tbody td {
@@ -160,6 +206,10 @@ tbody td.remark {
 }
 .insp-table td:nth-child(n+2):nth-child(-n+9) {
   text-align: center;
+}
+.insp-table td.remark,
+.insp-table thead th:last-child {
+  border-left: 2px solid var(--border);
 }
 .log-row td { border-bottom: 1px dashed var(--border); }
 .badge-overdue {
@@ -207,6 +257,10 @@ tbody td.remark {
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 18px;
+  position: sticky;
+  top: var(--header-h);
+  z-index: 27;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.10);
 }
 .connect-row {
   display: flex;
@@ -380,4 +434,23 @@ tbody td.remark {
 @media (max-width: 640px) {
   main { padding: 12px; }
   header.top { padding: 10px 12px; }
+}
+
+@media print {
+  header.top, #connectPanel, #masterForm, .save-bar, .print-wrap { display: none !important; }
+  .print-header {
+    display: block;
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 18px;
+    margin: 0 0 12px;
+  }
+  #info { position: static !important; }
+  .section-title, .insp-table thead th { position: static !important; }
+  .section-block.print-exclude { display: none !important; }
+  body { font-size: 11px; }
+  .insp-table { font-size: 10px; }
+  .insp-table tbody td, .insp-table thead th { padding: 4px 6px; white-space: normal; }
+  .section-block { page-break-inside: avoid; }
+  .locked-cell, .ref-hint, .badge-manual { display: inline; }
 }

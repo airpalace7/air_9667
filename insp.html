@@ -10,6 +10,14 @@
 <header class="top">
   <div class="title">HL9667 <span>MAINT STATUS</span></div>
   <div class="top-right">
+    <div class="print-wrap">
+      <button id="printBtn" class="print-btn" title="인쇄">🖨 인쇄</button>
+      <div id="printPanel" class="print-panel" style="display:none">
+        <div class="print-panel-title">인쇄할 항목 선택 (등록기호~PT CYC 정보는 항상 출력돼요)</div>
+        <div id="printSectionList"></div>
+        <button id="printGoBtn">이 항목만 인쇄하기</button>
+      </div>
+    </div>
     <div class="header-date" id="headerDate"></div>
     <button id="adminToggleBtn" class="admin-btn">관리자 모드</button>
     <nav class="tabs">
@@ -21,6 +29,7 @@
     </nav>
   </div>
 </header>
+<div id="printHeader" class="print-header"></div>
 <main>
   <div id="connectPanel" class="connect-panel" style="display:none">
     <div class="connect-row">
@@ -178,6 +187,8 @@ function renderInfo() {
   };
   document.getElementById('headerDate').innerHTML =
     '기준일<strong>' + escapeHtml(DATA.info.DATE ?? '') + '</strong>';
+  document.getElementById('printHeader').textContent =
+    'HL9667 MAINT STATUS - 기준일 ' + (DATA.info.DATE ?? '');
   const infoEl = document.getElementById('info');
   infoEl.innerHTML = Object.entries(infoLabels).map(([k, label]) => `
     <div class="info-cell">
@@ -233,6 +244,7 @@ function renderContent() {
   }
 
   contentEl.innerHTML = DATA.sections.map((sec, si) => `
+    <div class="section-block" data-si="${si}">
     <div class="section-title">${escapeHtml(sec.title)}</div>
     <table class="insp-table">
       <thead>
@@ -280,7 +292,10 @@ function renderContent() {
         }).join('')}
       </tbody>
     </table>
+    </div>
   `).join('');
+
+  renderPrintPanel();
 
   if (ADMIN) {
     contentEl.querySelectorAll('.cell-input').forEach(inp => {
@@ -307,11 +322,20 @@ function renderContent() {
   }
 }
 
+function renderPrintPanel() {
+  const list = document.getElementById('printSectionList');
+  if (!DATA || !DATA.sections) { list.innerHTML = ''; return; }
+  list.innerHTML = DATA.sections.map((sec, si) => `
+    <label class="print-check"><input type="checkbox" class="print-sec-chk" data-si="${si}" checked> ${escapeHtml(sec.title)}</label>
+  `).join('');
+}
+
 function onDataChanged() {
   recomputeAll();
   renderInfo();
   renderContent();
   markDirty();
+  updateStickyOffsets();
 }
 
 function markDirty() {
@@ -321,8 +345,10 @@ function markDirty() {
 function updateStickyOffsets() {
   const header = document.querySelector('header.top');
   const info = document.getElementById('info');
+  const sectionTitle = document.querySelector('.section-title');
   if (header) document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
   if (info) document.documentElement.style.setProperty('--info-h', info.offsetHeight + 'px');
+  if (sectionTitle) document.documentElement.style.setProperty('--section-h', sectionTitle.offsetHeight + 'px');
 }
 window.addEventListener('resize', updateStickyOffsets);
 
@@ -382,6 +408,23 @@ function setAdmin(on) {
   renderMasterForm();
   renderContent();
 }
+
+document.getElementById('printBtn').addEventListener('click', () => {
+  const panel = document.getElementById('printPanel');
+  panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+});
+
+document.getElementById('printGoBtn').addEventListener('click', () => {
+  const checks = document.querySelectorAll('.print-sec-chk');
+  const excluded = new Set();
+  checks.forEach(c => { if (!c.checked) excluded.add(+c.dataset.si); });
+  document.querySelectorAll('.section-block').forEach(block => {
+    const si = +block.dataset.si;
+    block.classList.toggle('print-exclude', excluded.has(si));
+  });
+  document.getElementById('printPanel').style.display = 'none';
+  window.print();
+});
 
 document.getElementById('adminToggleBtn').addEventListener('click', () => {
   if (ADMIN) {
