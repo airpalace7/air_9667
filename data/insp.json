@@ -25,7 +25,7 @@
           "item": "25 H",
           "interval_day": "-",
           "interval_time": "25:00",
-          "performed_date": "2026-3-19",
+          "performed_date": "2026-03-19",
           "performed_time": "6519:48",
           "next_date": "-",
           "next_time": "6544:48",
@@ -37,7 +37,7 @@
           "tsn_base": "ac",
           "interval_day_num": null,
           "interval_time_hours": 25,
-          "performed_date_iso": null,
+          "performed_date_iso": "2026-03-19",
           "performed_time_hours": 6519.8,
           "performed_date_editable": true,
           "performed_time_editable": true
@@ -1970,8 +1970,39 @@
           "interval_time_hours": null,
           "performed_date_iso": null,
           "performed_time_hours": null,
-          "performed_date_editable": true,
-          "performed_time_editable": true
+          "performed_date_editable": false,
+          "performed_time_editable": false,
+          "date_log": true,
+          "log_entries": [
+            {
+              "removed_date_iso": "2026-06-23",
+              "reinstalled_date_iso": null
+            },
+            {
+              "removed_date_iso": null,
+              "reinstalled_date_iso": null
+            },
+            {
+              "removed_date_iso": null,
+              "reinstalled_date_iso": null
+            },
+            {
+              "removed_date_iso": null,
+              "reinstalled_date_iso": null
+            },
+            {
+              "removed_date_iso": null,
+              "reinstalled_date_iso": null
+            },
+            {
+              "removed_date_iso": null,
+              "reinstalled_date_iso": null
+            },
+            {
+              "removed_date_iso": null,
+              "reinstalled_date_iso": null
+            }
+          ]
         },
         {
           "item": "Battery Capacity Test & Charge",
