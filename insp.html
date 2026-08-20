@@ -320,6 +320,21 @@ function renderContent() {
       });
     });
   }
+
+  updateSectionOffsets();
+}
+
+// 섹션마다 제목 길이/줄바꿈 여부가 달라 높이가 제각각이므로, 공용 값 하나를 모든 섹션에
+// 적용하면 어긋난다. 섹션별로 실제 제목 높이를 재서 그 섹션의 표 헤더(thead)에만 적용한다.
+function updateSectionOffsets() {
+  document.querySelectorAll('.section-block').forEach(block => {
+    const title = block.querySelector('.section-title');
+    if (!title) return;
+    const h = title.offsetHeight;
+    block.querySelectorAll('thead th').forEach(th => {
+      th.style.top = `calc(var(--header-h) + var(--info-h) + ${h}px)`;
+    });
+  });
 }
 
 function renderPrintPanel() {
@@ -345,10 +360,9 @@ function markDirty() {
 function updateStickyOffsets() {
   const header = document.querySelector('header.top');
   const info = document.getElementById('info');
-  const sectionTitle = document.querySelector('.section-title');
   if (header) document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
   if (info) document.documentElement.style.setProperty('--info-h', info.offsetHeight + 'px');
-  if (sectionTitle) document.documentElement.style.setProperty('--section-h', sectionTitle.offsetHeight + 'px');
+  updateSectionOffsets();
 }
 window.addEventListener('resize', updateStickyOffsets);
 

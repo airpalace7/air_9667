@@ -1,3 +1,10 @@
+/* 인쇄 시 가로 방향으로, 상단 40px는 모든 페이지에서 고정 헤더(제목+등록기호 정보) 공간으로
+   예약해둔다. 그래야 본문(항목 표)이 매 페이지마다 그 아래부터 시작해 겹치지 않는다. */
+@page {
+  size: landscape;
+  margin: 40px 8px 14px;
+}
+
 :root {
   --bg: #ffffff;
   --panel: #ffffff;
@@ -143,7 +150,7 @@ main { padding: 20px 28px; max-width: none; margin: 0; }
   border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
-  margin-bottom: 22px;
+  margin-bottom: 0;
 }
 .info-cell {
   background: var(--panel);
@@ -440,38 +447,45 @@ tbody td.remark {
   * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
   header.top, #connectPanel, #masterForm, .save-bar, .print-wrap { display: none !important; }
   .insp-table td:nth-child(10), .insp-table th:nth-child(10) { display: none !important; }
+
+  /* 인쇄용 상단 고정 헤더("HL9667 MAINT STATUS...")와 등록기호~PT CYC 정보를,
+     @page 여백으로 모든 페이지 상단에 예약해둔 공간 안에 나란히 붙여 배치한다. */
   .print-header {
     display: block;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
+    margin: 0;
+    padding: 0 6px 3px;
     font-family: var(--mono);
     font-weight: 700;
-    font-size: 14px;
-    padding: 4px 0;
+    font-size: 13px;
     background: #fff;
     z-index: 100;
   }
   #info {
     position: fixed;
-    top: 22px;
+    top: 18px;
     left: 0;
     right: 0;
     z-index: 99;
     background: #fff;
-    margin-bottom: 0;
+    margin: 0;
   }
-  main { margin-top: 92px; }
+  main { margin: 0 !important; padding: 0 6px !important; }
   .section-title, .insp-table thead th { position: static !important; }
   .section-block.print-exclude { display: none !important; }
-  body { font-size: 11px; }
-  .insp-table { font-size: 10px; }
-  .insp-table tbody td, .insp-table thead th { padding: 4px 6px; white-space: normal; }
+  .section-title { margin: 0 !important; padding: 8px 0 4px !important; }
+
+  body { font-size: 10.5px; }
+  .insp-table { font-size: 9.5px; width: 100%; }
+  .insp-table tbody td, .insp-table thead th { padding: 3px 5px; white-space: nowrap; }
   .section-block { page-break-inside: avoid; }
   .locked-cell, .ref-hint, .badge-manual { display: inline; }
   tbody tr.overdue { background: var(--danger-bg) !important; }
   tbody tr.overdue td:first-child { box-shadow: inset 3px 0 0 var(--danger) !important; }
+
   .info-bar {
     display: flex !important;
     flex-wrap: nowrap;
@@ -479,13 +493,18 @@ tbody td.remark {
     border: none;
     border-radius: 0;
     gap: 0;
+    padding-left: 0;
   }
   .info-cell {
-    padding: 2px 8px;
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    padding: 1px 6px;
     border-right: 1px solid var(--border);
     white-space: nowrap;
   }
+  .info-cell:first-child { padding-left: 0; }
   .info-cell:last-child { border-right: none; }
-  .info-cell .k { font-size: 8px; margin-bottom: 0; }
-  .info-cell .v { font-size: 11px; }
+  .info-cell .k { font-size: 8.5px; margin-bottom: 0; }
+  .info-cell .v { font-size: 10.5px; }
 }
