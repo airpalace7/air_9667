@@ -366,6 +366,22 @@ function updateStickyOffsets() {
 }
 window.addEventListener('resize', updateStickyOffsets);
 
+// 창 크기 변경뿐 아니라, 글자 줄바꿈/폰트 렌더링 등으로 헤더나 등록기호 바의 실제 높이가
+// 미세하게 바뀌는 모든 경우를 놓치지 않도록 크기 변화를 계속 감지해 --header-h/--info-h를
+// 최신 값으로 유지한다. (이걸 안 하면 로드 시점 이후 높이가 살짝 달라졌을 때 그 사이로
+// 스크롤되는 내용이 비쳐 보이는 문제가 생길 수 있다.)
+function setupResizeObservers() {
+  if (typeof ResizeObserver === 'undefined') return;
+  const header = document.querySelector('header.top');
+  const info = document.getElementById('info');
+  if (header) {
+    new ResizeObserver(updateStickyOffsets).observe(header);
+  }
+  if (info) {
+    new ResizeObserver(updateStickyOffsets).observe(info);
+  }
+}
+
 async function load() {
   const res = await fetch('data/insp.json');
   DATA = await res.json();
@@ -488,7 +504,7 @@ document.getElementById('saveBtn').addEventListener('click', async () => {
   }
 });
 
-load().then(updateStickyOffsets).catch(err => {
+load().then(updateStickyOffsets).then(setupResizeObservers).catch(err => {
   document.getElementById('content').innerHTML =
     '<div class="empty">데이터를 불러오지 못했습니다: ' + err.message + '</div>';
 });
