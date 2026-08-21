@@ -1748,7 +1748,7 @@
           "performed_date_iso": "2025-10-23",
           "performed_time_hours": 10938.1,
           "performed_date_editable": true,
-          "performed_time_editable": false,
+          "performed_time_editable": true,
           "performed_date_ref": null,
           "performed_time_ref": null
         },
@@ -1771,7 +1771,7 @@
           "performed_date_iso": "2025-11-03",
           "performed_time_hours": 10912.183333333332,
           "performed_date_editable": true,
-          "performed_time_editable": false,
+          "performed_time_editable": true,
           "performed_date_ref": null,
           "performed_time_ref": null
         },
@@ -1794,7 +1794,7 @@
           "performed_date_iso": "2025-08-05",
           "performed_time_hours": 10892.433333333332,
           "performed_date_editable": true,
-          "performed_time_editable": false,
+          "performed_time_editable": true,
           "performed_date_ref": null,
           "performed_time_ref": null
         },
@@ -1817,7 +1817,7 @@
           "performed_date_iso": "2025-08-04",
           "performed_time_hours": 10892.433333333332,
           "performed_date_editable": true,
-          "performed_time_editable": false,
+          "performed_time_editable": true,
           "performed_date_ref": null,
           "performed_time_ref": null
         },
@@ -1863,7 +1863,7 @@
           "performed_date_iso": "2025-08-05",
           "performed_time_hours": 10892.433333333332,
           "performed_date_editable": true,
-          "performed_time_editable": false,
+          "performed_time_editable": true,
           "performed_date_ref": null,
           "performed_time_ref": null
         },
@@ -1886,7 +1886,7 @@
           "performed_date_iso": "2025-08-05",
           "performed_time_hours": 10892.433333333332,
           "performed_date_editable": true,
-          "performed_time_editable": false,
+          "performed_time_editable": true,
           "performed_date_ref": null,
           "performed_time_ref": null
         },
@@ -1938,7 +1938,7 @@
           "performed_date_iso": "2024-01-18",
           "performed_time_hours": 10783.35,
           "performed_date_editable": true,
-          "performed_time_editable": false,
+          "performed_time_editable": true,
           "performed_date_ref": null,
           "performed_time_ref": null
         },
@@ -1961,7 +1961,7 @@
           "performed_date_iso": "2024-08-23",
           "performed_time_hours": 10809.35,
           "performed_date_editable": true,
-          "performed_time_editable": false,
+          "performed_time_editable": true,
           "performed_date_ref": null,
           "performed_time_ref": null
         },
@@ -1984,7 +1984,7 @@
           "performed_date_iso": "2020-07-03",
           "performed_time_hours": 10438.6,
           "performed_date_editable": true,
-          "performed_time_editable": false,
+          "performed_time_editable": true,
           "performed_date_ref": null,
           "performed_time_ref": null
         },
@@ -2007,7 +2007,7 @@
           "performed_date_iso": "2021-07-20",
           "performed_time_hours": 10524.266666666666,
           "performed_date_editable": true,
-          "performed_time_editable": false,
+          "performed_time_editable": true,
           "performed_date_ref": null,
           "performed_time_ref": null
         },
@@ -2030,7 +2030,7 @@
           "performed_date_iso": "2020-07-03",
           "performed_time_hours": 10438.6,
           "performed_date_editable": true,
-          "performed_time_editable": false,
+          "performed_time_editable": true,
           "performed_date_ref": null,
           "performed_time_ref": null
         },
@@ -2053,7 +2053,7 @@
           "performed_date_iso": "2018-05-22",
           "performed_time_hours": 10288,
           "performed_date_editable": true,
-          "performed_time_editable": false,
+          "performed_time_editable": true,
           "performed_date_ref": null,
           "performed_time_ref": null
         },
@@ -2076,7 +2076,7 @@
           "performed_date_iso": "2024-08-23",
           "performed_time_hours": 10809.35,
           "performed_date_editable": true,
-          "performed_time_editable": false,
+          "performed_time_editable": true,
           "performed_date_ref": null,
           "performed_time_ref": null
         },
@@ -2099,7 +2099,7 @@
           "performed_date_iso": "2016-12-13",
           "performed_time_hours": 10026,
           "performed_date_editable": true,
-          "performed_time_editable": false,
+          "performed_time_editable": true,
           "performed_date_ref": null,
           "performed_time_ref": null
         },
@@ -2122,7 +2122,7 @@
           "performed_date_iso": "2018-05-22",
           "performed_time_hours": 10287.966666666667,
           "performed_date_editable": true,
-          "performed_time_editable": false,
+          "performed_time_editable": true,
           "performed_date_ref": null,
           "performed_time_ref": null
         },
@@ -2145,7 +2145,7 @@
           "performed_date_iso": "2016-07-15",
           "performed_time_hours": 10025.9,
           "performed_date_editable": true,
-          "performed_time_editable": false,
+          "performed_time_editable": true,
           "performed_date_ref": null,
           "performed_time_ref": null
         },
@@ -2189,7 +2189,7 @@
           "remain_time": "-",
           "remark": "OVHL CALENDAR : 3 years (installed on helicopter)",
           "overdue": true,
-          "recalc": null,
+          "recalc": true,
           "tsn_base": null,
           "interval_day_num": null,
           "interval_time_hours": null,
@@ -2198,29 +2198,9 @@
           "performed_date_editable": true,
           "performed_time_editable": true,
           "performed_date_ref": null,
-          "performed_time_ref": null
-        },
-        {
-          "item": "CARGO HOOK - REMOVED DATE",
-          "interval_day": "",
-          "interval_time": "",
-          "performed_date": "제거일",
-          "performed_time": "재 장착일",
-          "next_date": "",
-          "next_time": "",
-          "remain_day": "",
-          "remain_time": "",
-          "remark": "",
-          "overdue": false,
-          "recalc": true,
-          "tsn_base": null,
-          "interval_day_num": null,
-          "interval_time_hours": null,
-          "performed_date_iso": null,
-          "performed_time_hours": null,
-          "performed_date_editable": false,
-          "performed_time_editable": false,
+          "performed_time_ref": null,
           "date_log": true,
+          "cargo_interval_days": 1095,
           "log_entries": [
             {
               "removed_date_iso": "2026-06-23",
@@ -2250,9 +2230,7 @@
               "removed_date_iso": null,
               "reinstalled_date_iso": null
             }
-          ],
-          "performed_date_ref": null,
-          "performed_time_ref": null
+          ]
         },
         {
           "item": "Battery Capacity Test & Charge",
