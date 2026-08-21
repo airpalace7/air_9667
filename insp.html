@@ -116,6 +116,55 @@ function isoDate(d) {
   return d.toISOString().slice(0, 10);
 }
 
+function daysBetweenIso(iso1, iso2) {
+  const d1 = new Date(iso1 + 'T00:00:00Z');
+  const d2 = new Date(iso2 + 'T00:00:00Z');
+  return Math.round((d2 - d1) / 86400000);
+}
+
+function addDaysIso(iso, days) {
+  const d = new Date(iso + 'T00:00:00Z');
+  d.setUTCDate(d.getUTCDate() + days);
+  return isoDate(d);
+}
+
+// CARGO HOOK처럼 "장착 중인 기간만" 날짜를 카운트해야 하는 항목 전용 계산.
+// PERFORMED DATE(최초 장착일)부터 카운트를 시작하고, 제거일에 멈췄다가 재장착일부터
+// 다시 카운트한다. 아직 재장착 전(현재 탈거 중)이면 그 시점에서 카운트가 멈춘 채로 있는다.
+function computeCargoHookDates(row, raw) {
+  const startIso = row.performed_date_iso;
+  const intervalDays = row.cargo_interval_days;
+  if (!startIso || !intervalDays || !raw.today) return;
+
+  const logs = (row.log_entries || [])
+    .filter(l => l.removed_date_iso)
+    .slice()
+    .sort((a, b) => a.removed_date_iso < b.removed_date_iso ? -1 : 1);
+
+  let cursor = startIso;
+  let installedDays = 0;
+  let paused = false;
+
+  for (const log of logs) {
+    installedDays += daysBetweenIso(cursor, log.removed_date_iso);
+    if (log.reinstalled_date_iso) {
+      cursor = log.reinstalled_date_iso;
+    } else {
+      paused = true;
+      cursor = null;
+      break;
+    }
+  }
+  if (!paused && cursor) {
+    installedDays += daysBetweenIso(cursor, raw.today);
+  }
+
+  const remainDays = intervalDays - installedDays;
+  row.remain_day = String(remainDays);
+  row.overdue = remainDays < 0;
+  row.next_date = paused ? '탈거중(재장착 후 재계산)' : addDaysIso(raw.today, remainDays);
+}
+
 function recomputeRow(row, raw) {
   // 관리자 모드에서 수정한 실제값(iso/hours)을 화면 표시용 문자열에도 동기화
   // (이걸 안 하면 관리자 모드를 껐을 때 예전 값이 그대로 보이는 불일치가 생김)
@@ -132,6 +181,11 @@ function recomputeRow(row, raw) {
   }
   if (row.interval_time_hours !== null && row.interval_time_hours !== undefined && !isNaN(row.interval_time_hours)) {
     row.interval_time = hoursToStr(row.interval_time_hours);
+  }
+
+  if (row.date_log && row.cargo_interval_days) {
+    computeCargoHookDates(row, raw);
+    return; // 이 항목은 표준 재계산 대신 전용(제거일 반영) 계산을 사용
   }
 
   if (!row.recalc) return; // NEXT DUE/REMAIN은 엑셀에서 계산한 값을 그대로 유지("엑셀관리")
@@ -257,28 +311,9 @@ function renderContent() {
       </thead>
       <tbody>
         ${sec.rows.map((r, ri) => {
-          if (r.date_log) {
-            // "CARGO HOOK - REMOVED DATE"처럼 제거일/재장착일 쌍을 여러 줄 기록하는 특수 행
-            const header = `
-              <tr>
-                <td>${escapeHtml(r.item)}</td>
-                <td></td><td></td>
-                <td><strong>${escapeHtml(r.performed_date)}</strong></td>
-                <td><strong>${escapeHtml(r.performed_time)}</strong></td>
-                <td></td><td></td><td></td><td></td><td class="remark">${escapeHtml(r.remark)}</td>
-              </tr>`;
-            const logRows = (r.log_entries || []).map((log, li) => `
-              <tr class="log-row">
-                <td></td><td></td><td></td>
-                <td>${ADMIN ? `<input type="text" placeholder="yyyy-mm-dd" class="cell-input" data-si="${si}" data-ri="${ri}" data-logidx="${li}" data-field="removed_date_iso" value="${log.removed_date_iso || ''}">` : escapeHtml(log.removed_date_iso || '')}</td>
-                <td>${ADMIN ? `<input type="text" placeholder="yyyy-mm-dd" class="cell-input" data-si="${si}" data-ri="${ri}" data-logidx="${li}" data-field="reinstalled_date_iso" value="${log.reinstalled_date_iso || ''}">` : escapeHtml(log.reinstalled_date_iso || '')}</td>
-                <td></td><td></td><td></td><td></td><td></td>
-              </tr>`).join('');
-            return header + logRows;
-          }
-          return `
+          const mainRow = `
           <tr class="${r.overdue ? 'overdue' : ''}">
-            <td>${escapeHtml(r.item)}${r.overdue ? '<span class="badge-overdue">초과</span>' : ''}${(ADMIN && !r.recalc) ? '<span class="badge-manual" title="다음 예정일/잔여시간은 자동 계산되지 않아요. 엑셀에서 관리하세요.">엑셀관리</span>' : ''}</td>
+            <td>${escapeHtml(r.item)}${r.overdue ? '<span class="badge-overdue">초과</span>' : ''}${(ADMIN && !r.recalc) ? '<span class="badge-manual" title="다음 예정일/잔여시간은 자동 계산되지 않아요. 엑셀에서 관리하세요.">엑셀관리</span>' : ''}${(ADMIN && r.date_log) ? '<span class="badge-manual" title="제거/재장착 기간은 카운트에서 제외하고 계산돼요.">제거일 반영</span>' : ''}</td>
             <td>${escapeHtml(r.interval_day)}</td>
             <td>${escapeHtml(r.interval_time)}</td>
             <td>${ADMIN && r.performed_date_editable ? `<input type="text" placeholder="yyyy-mm-dd" class="cell-input" data-si="${si}" data-ri="${ri}" data-field="performed_date_iso" value="${r.performed_date_iso || ''}">` : (ADMIN ? lockedCellHtml(r.performed_date, r.performed_date_ref) : escapeHtml(r.performed_date))}</td>
@@ -289,6 +324,25 @@ function renderContent() {
             <td>${escapeHtml(r.remain_time)}</td>
             <td class="remark">${ADMIN ? `<textarea rows="1" class="cell-input remark-input" data-si="${si}" data-ri="${ri}" data-field="remark">${escapeHtml(r.remark || '')}</textarea>` : escapeHtml(r.remark)}</td>
           </tr>`;
+
+          if (!r.date_log) return mainRow;
+
+          // 제거일/재장착일 기록 서브테이블 (예: CARGO HOOK). 장착 중이 아닌 기간은
+          // 사용일수 계산에서 제외하도록 별도 계산 함수(computeCargoHookDates)가 처리한다.
+          const logHeader = `
+            <tr class="log-header-row">
+              <td></td><td></td><td></td>
+              <td><strong>제거일</strong></td><td><strong>재장착일</strong></td>
+              <td></td><td></td><td></td><td></td><td></td>
+            </tr>`;
+          const logRows = (r.log_entries || []).map((log, li) => `
+            <tr class="log-row">
+              <td></td><td></td><td></td>
+              <td>${ADMIN ? `<input type="text" placeholder="yyyy-mm-dd" class="cell-input" data-si="${si}" data-ri="${ri}" data-logidx="${li}" data-field="removed_date_iso" value="${log.removed_date_iso || ''}">` : escapeHtml(log.removed_date_iso || '')}</td>
+              <td>${ADMIN ? `<input type="text" placeholder="yyyy-mm-dd" class="cell-input" data-si="${si}" data-ri="${ri}" data-logidx="${li}" data-field="reinstalled_date_iso" value="${log.reinstalled_date_iso || ''}">` : escapeHtml(log.reinstalled_date_iso || '')}</td>
+              <td></td><td></td><td></td><td></td><td></td>
+            </tr>`).join('');
+          return mainRow + logHeader + logRows;
         }).join('')}
       </tbody>
     </table>

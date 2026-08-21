@@ -133,35 +133,58 @@ def convert_insp(ws, ws_formula):
     }
     sections = []
     cur = None
-    pending_log_row = None  # "CARGO HOOK - REMOVED DATE" 같은 로그형 항목 뒤에 오는 빈 행들을 담을 곳
+    # "제거일"/"재 장착일" 라벨 행을 만나면, 바로 앞서 추가한 실제 항목(예: CARGO HOOK 본체)에
+    # 로그를 붙인다. 그 라벨 행 자체는 결과에 넣지 않는다(열 라벨일 뿐 별도 항목이 아님).
+    last_row_obj = None
+    last_row_num = None
+    log_target = None  # 지금 로그를 채워넣고 있는 대상 row_obj (없으면 None)
     for r in range(7, ws.max_row + 1):
         a = ws.cell(r, 1).value
         b = ws.cell(r, 2).value
         if a and isinstance(a, str) and a.strip().startswith("▶"):
             cur = {"title": a.strip(), "rows": []}
             sections.append(cur)
-            pending_log_row = None
+            last_row_obj = None
+            log_target = None
             continue
         if cur is None:
             continue
         if a is None and b is None:
-            # item 칸이 비어있는 행. 바로 위가 "날짜 로그" 헤더 행이었다면(예: CARGO HOOK -
-            # REMOVED DATE), 이 행의 D/E열을 제거일/재장착일 한 쌍으로 로그에 추가한다.
-            if pending_log_row is not None:
+            # item 칸이 비어있는 행. 로그 대상이 지정돼 있다면 이 행의 D/E열을
+            # 제거일/재장착일 한 쌍으로 그 항목의 로그에 추가한다.
+            if log_target is not None:
                 removed = date_iso(ws.cell(r, 4).value)
                 reinstalled = date_iso(ws.cell(r, 5).value)
-                pending_log_row["log_entries"].append({
+                log_target["log_entries"].append({
                     "removed_date_iso": removed,
                     "reinstalled_date_iso": reinstalled,
                 })
             continue
+
+        performed_date_raw = ws.cell(r, 4).value
+        performed_time_raw = ws.cell(r, 5).value
+        # "제거일"/"재 장착일" 같은 열 라벨 행: 별도 항목이 아니라 바로 위 항목의
+        # 로그 표 머리글일 뿐이므로, 결과에 추가하지 않고 앞 항목에 로그 기능을 붙인다.
+        is_log_label_row = (
+            isinstance(performed_date_raw, str) and "제거일" in performed_date_raw
+            and isinstance(performed_time_raw, str) and "장착일" in performed_time_raw
+        )
+        if is_log_label_row:
+            if last_row_obj is not None:
+                last_row_obj["date_log"] = True
+                last_row_obj["log_entries"] = []
+                n_val = ws.cell(last_row_num, 14).value  # 숨겨진 N열: 실제 간격(일) 상수
+                if isinstance(n_val, (int, float)):
+                    last_row_obj["cargo_interval_days"] = int(n_val)
+                last_row_obj["recalc"] = True  # 이제 웹에서 전용 로직으로 정확히 계산되므로
+                log_target = last_row_obj
+            continue
+
         item = fmt_val(a)[0]
         if not item:
             continue
         interval_day_raw = ws.cell(r, 2).value
         interval_time_raw = ws.cell(r, 3).value
-        performed_date_raw = ws.cell(r, 4).value
-        performed_time_raw = ws.cell(r, 5).value
         interval_day = fmt_val(interval_day_raw)[0]
         interval_time = fmt_val(interval_time_raw)[0]
         performed_date = fmt_val(performed_date_raw)[0]
@@ -175,20 +198,13 @@ def convert_insp(ws, ws_formula):
         overdue = isinstance(remain_day_raw, (int, float)) and remain_day_raw < 0
 
         recalculable, tsn_base = classify_row(ws_formula, r)
-        # D열(PERFORMED DATE)/E열(PERFORMED A/C TIME) 자체가 다른 행을 참조하는 수식이면
-        # (예: =D41) 그 항목은 독립적으로 입력하는 값이 아니라 다른 행의 값을 그대로 따라가는
-        # 것이므로 웹에서 직접 수정할 수 없게 한다. 그 외에는(원본이 raw 값이면) 편집 가능.
-        performed_date_editable = not is_formula(ws_formula.cell(r, 4).value)
-        performed_time_editable = not is_formula(ws_formula.cell(r, 5).value)
         performed_date_ref = ref_info(ws, ws_formula.cell(r, 4).value)
         performed_time_ref = ref_info(ws, ws_formula.cell(r, 5).value)
-
-        # "CARGO HOOK - REMOVED DATE"처럼 D/E열이 실제 값이 아니라 "제거일"/"재장착일" 같은
-        # 열 라벨로 쓰이는 헤더 행: 그 자체는 입력칸이 아니므로 편집 불가로 두고, 뒤따르는
-        # 빈 행들을 로그 항목으로 모은다.
-        is_date_log = isinstance(performed_date_raw, str) and isinstance(performed_time_raw, str) \
-            and not is_formula(performed_date_raw) and not is_formula(performed_time_raw) \
-            and performed_date_raw.strip() != "" and performed_time_raw.strip() != ""
+        # 다른 행을 그대로 참조하는 단순 수식(예: =D41)일 때만 편집 불가로 잠근다.
+        # 계산 상수로 들어간 수식(예: =(10938+6/60)/24)은 다른 셀을 참조하지 않으므로
+        # 편집 가능하게 둔다 — 값 자체를 웹에서 바로 고칠 수 있어야 하기 때문.
+        performed_date_editable = performed_date_ref is None
+        performed_time_editable = performed_time_ref is None
 
         row_obj = {
             "item": item,
@@ -204,22 +220,19 @@ def convert_insp(ws, ws_formula):
             "overdue": overdue,
             "recalc": recalculable,
             "tsn_base": tsn_base,
-            "performed_date_editable": False if is_date_log else performed_date_editable,
-            "performed_time_editable": False if is_date_log else performed_time_editable,
-            "performed_date_ref": None if is_date_log else performed_date_ref,
-            "performed_time_ref": None if is_date_log else performed_time_ref,
+            "performed_date_editable": performed_date_editable,
+            "performed_time_editable": performed_time_editable,
+            "performed_date_ref": performed_date_ref,
+            "performed_time_ref": performed_time_ref,
             "interval_day_num": interval_day_raw if isinstance(interval_day_raw, (int, float)) else None,
             "interval_time_hours": hours_of(interval_time_raw),
-            "performed_date_iso": None if is_date_log else date_iso(performed_date_raw),
-            "performed_time_hours": None if is_date_log else hours_of(performed_time_raw),
+            "performed_date_iso": date_iso(performed_date_raw),
+            "performed_time_hours": hours_of(performed_time_raw),
         }
-        if is_date_log:
-            row_obj["date_log"] = True
-            row_obj["log_entries"] = []
-            pending_log_row = row_obj
-        else:
-            pending_log_row = None
         cur["rows"].append(row_obj)
+        last_row_obj = row_obj
+        last_row_num = r
+        log_target = None  # 새 일반 항목이 나왔으니 로그 채우기 대상은 해제(라벨 행 나오면 다시 지정)
     return {"info": info, "raw": raw, "sections": sections}
 
 
