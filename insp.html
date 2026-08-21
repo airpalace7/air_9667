@@ -29,7 +29,10 @@
     </nav>
   </div>
 </header>
-<div id="printHeader" class="print-header"></div>
+<div id="printHeaderGroup">
+  <div id="printHeader" class="print-header"></div>
+  <div id="info" class="info-bar"></div>
+</div>
 <main>
   <div id="connectPanel" class="connect-panel" style="display:none">
     <div class="connect-row">
@@ -44,7 +47,6 @@
 
   <div id="masterForm" class="master-form" style="display:none"></div>
 
-  <div id="info" class="info-bar"></div>
   <div id="content"><div class="loading">불러오는 중...</div></div>
 
   <div id="saveBar" class="save-bar" style="display:none">
@@ -376,6 +378,7 @@ function renderContent() {
   }
 
   updateSectionOffsets();
+  setupSectionTitleObservers();
 }
 
 // 섹션마다 제목 길이/줄바꿈 여부가 달라 높이가 제각각이므로, 공용 값 하나를 모든 섹션에
@@ -434,6 +437,17 @@ function setupResizeObservers() {
   if (info) {
     new ResizeObserver(updateStickyOffsets).observe(info);
   }
+}
+
+// 섹션 제목 높이도 계속 감시한다 (renderContent가 다시 그려질 때마다 새 DOM 노드가
+// 생기므로, 매번 새로 관찰 대상을 등록한다). 이걸 안 하면 폰트 로딩/줄바꿈 등으로
+// 제목 높이가 살짝 바뀌었을 때 표 헤더와 겹쳐 보이는 문제가 남는다.
+let sectionTitleObserver = null;
+function setupSectionTitleObservers() {
+  if (typeof ResizeObserver === 'undefined') return;
+  if (sectionTitleObserver) sectionTitleObserver.disconnect();
+  sectionTitleObserver = new ResizeObserver(updateSectionOffsets);
+  document.querySelectorAll('.section-title').forEach(el => sectionTitleObserver.observe(el));
 }
 
 async function load() {
