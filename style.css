@@ -1,5 +1,5 @@
-/* 인쇄 시 가로 방향으로 출력한다. 상단 여백은 브라우저의 반복 헤더(table-header-group)가
-   알아서 처리하므로 여기서는 최소 여백만 둔다. */
+/* 인쇄 시 가로 방향으로 출력한다. 상단 반복 헤더는 각 표의 thead 안에 직접 넣어뒀으므로
+   (thead는 브라우저가 페이지마다 자동으로 반복해줌) 별도의 여백 예약이 필요 없다. */
 @page {
   size: landscape;
   margin: 8mm;
@@ -136,12 +136,9 @@ nav.tabs a.active {
 }
 
 .print-header { display: none; }
+.print-only-row { display: none; }
 
 main { padding: 20px 28px; max-width: none; margin: 0; }
-
-#printHeaderGroup {
-  padding: 0 28px;
-}
 
 .info-bar {
   position: sticky;
@@ -281,7 +278,7 @@ tbody td.remark {
   padding: 16px;
   margin-bottom: 18px;
   position: sticky;
-  top: calc(var(--header-h) + var(--info-h));
+  top: var(--header-h);
   z-index: 27;
   box-shadow: 0 6px 16px rgba(0,0,0,0.10);
 }
@@ -462,35 +459,19 @@ tbody td.remark {
 @media print {
   * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
   header.top, #connectPanel, #masterForm, .save-bar, .print-wrap { display: none !important; }
+  /* 화면용 등록기호 바/타이틀은 인쇄에서 숨긴다. 대신 각 표의 thead 안에 넣어둔
+     복사본이 표시된다 - thead는 브라우저가 인쇄 시 페이지마다 자동으로 반복해주므로,
+     페이지가 몇 장이 되든 항상 각 페이지 맨 위에 정확히 나온다(픽셀 계산 불필요). */
+  #printHeader, #info { display: none !important; }
+  .print-only-row { display: table-row !important; }
   .insp-table td:nth-child(10), .insp-table th:nth-child(10) { display: none !important; }
 
-  /* 브라우저의 "표 헤더 반복" 기능을 이용해 제목+등록기호 정보를 모든 페이지 상단에
-     자동으로 반복시킨다. 픽셀 높이를 직접 계산/예약할 필요가 없어서, 등록기호 정보가
-     몇 줄로 줄바뀌든 절대 겹치지 않는다. */
-  body { display: table; width: 100%; font-size: 10.5px; }
-  #printHeaderGroup { display: table-header-group; }
-  main { display: table-row-group; margin: 0 !important; padding: 0 6px !important; }
-
-  .print-header {
-    display: block;
-    margin: 0;
-    padding: 0 6px 3px;
-    font-family: var(--mono);
-    font-weight: 700;
-    font-size: 13px;
-    background: #fff;
-  }
-  #info {
-    position: static;
-    background: #fff;
-    margin: 0 0 4px;
-    padding: 0 6px;
-  }
-
-  .section-title, .insp-table thead th { position: static !important; }
+  main { margin: 0 !important; padding: 0 6px !important; }
+  .section-title { position: static !important; margin: 0 !important; padding: 8px 0 4px !important; }
+  .insp-table thead th { position: static !important; }
   .section-block.print-exclude { display: none !important; }
-  .section-title { margin: 0 !important; padding: 8px 0 4px !important; }
 
+  body { font-size: 10.5px; }
   .insp-table { font-size: 9.5px; width: 100%; }
   .insp-table tbody td, .insp-table thead th { padding: 3px 5px; white-space: nowrap; }
   .section-block { page-break-inside: avoid; }
@@ -498,26 +479,23 @@ tbody td.remark {
   tbody tr.overdue { background: var(--danger-bg) !important; }
   tbody tr.overdue td:first-child { box-shadow: inset 3px 0 0 var(--danger) !important; }
 
-  .info-bar {
-    display: flex !important;
-    flex-wrap: wrap;
-    overflow: visible;
-    background: #fff !important;
-    border: none;
-    border-radius: 0;
-    gap: 0;
-    padding-left: 0;
+  /* 각 표의 thead 맨 위 두 줄(제목/등록기호 정보) - 표마다 복사되어 있어서
+     페이지가 나뉘어도 매 페이지 위에 자동으로 다시 나온다. */
+  .print-thead-title {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 12px;
+    text-align: left !important;
+    padding: 2px 6px !important;
+    background: #fff;
   }
-  .info-cell {
-    display: flex;
-    align-items: baseline;
-    gap: 4px;
-    padding: 1px 6px;
-    border-right: 1px solid var(--border);
-    white-space: nowrap;
+  .print-thead-info {
+    text-align: left !important;
+    padding: 2px 6px 6px !important;
+    background: #fff;
+    font-size: 9.5px;
+    white-space: normal !important;
   }
-  .info-cell:first-child { padding-left: 0; }
-  .info-cell:last-child { border-right: none; }
-  .info-cell .k { font-size: 8.5px; margin-bottom: 0; }
-  .info-cell .v { font-size: 10.5px; }
+  .print-thead-info .info-piece { margin-right: 12px; }
+  .print-thead-info .info-piece b { margin-left: 3px; }
 }

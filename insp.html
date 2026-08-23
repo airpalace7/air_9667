@@ -29,10 +29,7 @@
     </nav>
   </div>
 </header>
-<div id="printHeaderGroup">
-  <div id="printHeader" class="print-header"></div>
-  <div id="info" class="info-bar"></div>
-</div>
+<div id="printHeader" class="print-header"></div>
 <main>
   <div id="connectPanel" class="connect-panel" style="display:none">
     <div class="connect-row">
@@ -47,6 +44,7 @@
 
   <div id="masterForm" class="master-form" style="display:none"></div>
 
+  <div id="info" class="info-bar"></div>
   <div id="content"><div class="loading">불러오는 중...</div></div>
 
   <div id="saveBar" class="save-bar" style="display:none">
@@ -254,6 +252,26 @@ function renderInfo() {
   `).join('');
 }
 
+// 인쇄 시 각 표의 thead 맨 위에 넣을 제목/등록기호 정보 행 2줄을 만든다.
+// thead는 브라우저가 페이지마다 자동으로 반복해주므로, 이 두 줄을 모든 표에
+// 똑같이 넣어두면 몇 페이지가 되든 매 페이지 위에 정확히 나온다.
+function buildPrintTheadRows() {
+  const infoLabels = {
+    "등록기호": "등록기호", "TSN": "A/C TSN", "L/D": "L/D CYCLE",
+    "1ENG_TSN": "#1 ENG TSN", "2ENG_TSN": "#2 ENG TSN",
+    "1ENG_GG_CYC": "#1 GG CYC", "2ENG_GG_CYC": "#2 GG CYC",
+    "1ENG_PT_CYC": "#1 PT CYC", "2ENG_PT_CYC": "#2 PT CYC"
+  };
+  const titleText = 'HL9667 MAINT STATUS - 기준일 ' + (DATA.info.DATE ?? '');
+  const infoText = Object.entries(infoLabels).map(([k, label]) =>
+    `<span class="info-piece">${escapeHtml(label)}<b>${escapeHtml(DATA.info[k] ?? '')}</b></span>`
+  ).join('');
+  return `
+    <tr class="print-only-row"><th colspan="9" class="print-thead-title">${escapeHtml(titleText)}</th></tr>
+    <tr class="print-only-row"><th colspan="9" class="print-thead-info">${infoText}</th></tr>
+  `;
+}
+
 function renderMasterForm() {
   const el = document.getElementById('masterForm');
   if (!ADMIN) { el.style.display = 'none'; return; }
@@ -304,6 +322,7 @@ function renderContent() {
     <div class="section-title">${escapeHtml(sec.title)}</div>
     <table class="insp-table">
       <thead>
+        ${buildPrintTheadRows()}
         <tr>
           <th>ITEM</th><th>INTERVAL DAY</th><th>INTERVAL TIME/CYC</th>
           <th>PERFORMED DATE</th><th>PERFORMED A/C TIME</th>
