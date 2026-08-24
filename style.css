@@ -232,6 +232,20 @@ tbody td.remark {
   border-left: 2px solid var(--border);
 }
 .log-row td { border-bottom: 1px dashed var(--border); }
+
+/* 02~04 페이지(기체부품/엔진) 전용: 섹션 제목이 없는 단일 표라서, sticky 오프셋에
+   --section-h를 더하지 않는다(01의 thead 규칙과 다름). */
+.comp-table thead th {
+  top: calc(var(--header-h) + var(--info-h));
+}
+.comp-table td:nth-child(n+3):nth-child(-n+13) {
+  text-align: center;
+}
+.comp-table td.remark,
+.comp-table thead th:last-child {
+  border-left: 2px solid var(--border);
+}
+
 .badge-overdue {
   display: inline-block;
   font-family: var(--sans);
@@ -465,15 +479,17 @@ tbody td.remark {
   #printHeader, #info { display: none !important; }
   .print-only-row { display: table-row !important; }
   .insp-table td:nth-child(10), .insp-table th:nth-child(10) { display: none !important; }
+  .comp-table td:nth-child(14), .comp-table th:nth-child(14) { display: none !important; }
 
   main { margin: 0 !important; padding: 0 6px !important; }
   .section-title { position: static !important; margin: 0 !important; padding: 8px 0 4px !important; }
-  .insp-table thead th { position: static !important; }
+  .insp-table thead th, .comp-table thead th { position: static !important; }
   .section-block.print-exclude { display: none !important; }
 
   body { font-size: 10.5px; }
-  .insp-table { font-size: 9.5px; width: 100%; }
-  .insp-table tbody td, .insp-table thead th { padding: 3px 5px; white-space: nowrap; }
+  .insp-table, .comp-table { font-size: 9.5px; width: 100%; }
+  .insp-table tbody td, .insp-table thead th,
+  .comp-table tbody td, .comp-table thead th { padding: 3px 5px; white-space: nowrap; }
   .section-block { page-break-inside: avoid; }
   .locked-cell, .ref-hint, .badge-manual { display: inline; }
   tbody tr.overdue { background: var(--danger-bg) !important; }

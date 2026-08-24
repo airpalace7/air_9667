@@ -1,6 +1,7 @@
 (function () {
   const scriptEl = document.currentScript;
   const src = scriptEl.getAttribute('data-src');
+  let DATA = null;
 
   function escapeHtml(s) {
     if (s === null || s === undefined) return '';
@@ -9,9 +10,24 @@
     }[c]));
   }
 
+  // 인쇄 시 각 페이지 맨 위에 자동으로 반복되도록, thead 안에 제목+등록기호 정보 두 줄을
+  // 넣어둔다. thead는 브라우저가 인쇄할 때 페이지가 나뉠 때마다 자동으로 다시 보여주는
+  // 기본 기능이라, 픽셀 계산 없이도 몇 페이지가 되든 항상 정확히 나온다.
+  function buildPrintTheadRows(todayLabel, gridItems) {
+    const titleText = 'HL9667 MAINT STATUS - 기준일 ' + (todayLabel || '');
+    const infoText = gridItems.map(item =>
+      `<span class="info-piece">${escapeHtml(item.label)}<b>${escapeHtml(item.value)}</b></span>`
+    ).join('');
+    return `
+      <tr class="print-only-row"><th colspan="14" class="print-thead-title">${escapeHtml(titleText)}</th></tr>
+      <tr class="print-only-row"><th colspan="14" class="print-thead-info">${infoText}</th></tr>
+    `;
+  }
+
   async function load() {
     const res = await fetch(src);
     const data = await res.json();
+    DATA = data;
 
     const infoAll = data.info || [];
     const todayItem = infoAll.find(it => it.label === 'Today');
@@ -37,13 +53,14 @@
     }
 
     contentEl.innerHTML = `
-      <table>
+      <table class="comp-table">
         <thead>
+          ${buildPrintTheadRows(todayItem ? todayItem.value : '', gridItems)}
           <tr>
             <th>No</th><th>명칭</th><th>P/N</th><th>S/N</th><th>구분</th>
             <th>교환주기</th><th>장착일</th><th>장착시</th><th>위치</th>
             <th>TSN</th><th>사용시간</th><th>다음교환</th>
-            <th>잔여시간</th><th>비고</th>
+            <th>잔여시간</th><th class="remark-th">비고</th>
           </tr>
         </thead>
         <tbody>
@@ -78,7 +95,22 @@
   }
   window.addEventListener('resize', updateStickyOffsets);
 
-  load().then(updateStickyOffsets).catch(err => {
+  // 창 크기 변경뿐 아니라, 등록기호 바가 좁은 화면에서 줄바뀜/글자 렌더링 차이로 높이가
+  // 미세하게 바뀌는 경우까지 놓치지 않도록 계속 감시한다.
+  function setupResizeObservers() {
+    if (typeof ResizeObserver === 'undefined') return;
+    const header = document.querySelector('header.top');
+    const info = document.getElementById('info');
+    if (header) new ResizeObserver(updateStickyOffsets).observe(header);
+    if (info) new ResizeObserver(updateStickyOffsets).observe(info);
+  }
+
+  const printBtn = document.getElementById('printBtn');
+  if (printBtn) {
+    printBtn.addEventListener('click', () => window.print());
+  }
+
+  load().then(updateStickyOffsets).then(setupResizeObservers).catch(err => {
     document.getElementById('content').innerHTML =
       '<div class="empty">데이터를 불러오지 못했습니다: ' + err.message + '</div>';
   });
