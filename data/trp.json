@@ -55,7 +55,9 @@
       "usage_time": "3206:58",
       "next_exchange_time": "31327:40",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "24793:02",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -63,7 +65,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 2516.883333333333
+      "baseline_value": 2516.883333333333,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "2",
@@ -90,7 +98,9 @@
       "usage_time": "8383:14",
       "next_exchange_time": "35151:24",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "28616:46",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -98,7 +108,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 5183.0
+      "baseline_value": 5183.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "3",
@@ -125,7 +141,9 @@
       "usage_time": "2152:32",
       "next_exchange_time": "32382:06",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "25847:28",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -133,7 +151,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "4",
@@ -160,7 +184,9 @@
       "usage_time": "2152:32",
       "next_exchange_time": "41382:06",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "34847:28",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -168,7 +194,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "5",
@@ -195,7 +227,9 @@
       "usage_time": "4716:57",
       "next_exchange_time": "29817:41",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "23283:03",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -203,7 +237,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 3678.8166666666666
+      "baseline_value": 3678.8166666666666,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "6",
@@ -230,7 +270,9 @@
       "usage_time": "12009:21",
       "next_exchange_time": "31525:17",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "24990:39",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -238,7 +280,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 10971.216666666667
+      "baseline_value": 10971.216666666667,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "7",
@@ -265,7 +313,9 @@
       "usage_time": "8509:38",
       "next_exchange_time": "26025:00",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "19490:22",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -273,7 +323,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 5435.3
+      "baseline_value": 5435.3,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "8",
@@ -300,7 +356,9 @@
       "usage_time": "8509:38",
       "next_exchange_time": "35025:00",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "28490:22",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -308,7 +366,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 6699.0
+      "baseline_value": 6699.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "9",
@@ -335,7 +399,9 @@
       "usage_time": "",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -343,7 +409,13 @@
       "has_interval": false,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "10",
@@ -370,7 +442,9 @@
       "usage_time": "6534:38",
       "next_exchange_time": "29400:00",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "22865:22",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -378,7 +452,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 4724.0
+      "baseline_value": 4724.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "11",
@@ -405,7 +485,9 @@
       "usage_time": "6534:38",
       "next_exchange_time": "29400:00",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "22865:22",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -413,7 +495,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 4724.0
+      "baseline_value": 4724.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "12",
@@ -440,7 +528,9 @@
       "usage_time": "2367:38",
       "next_exchange_time": "22167:00",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "15632:22",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -448,7 +538,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "13",
@@ -475,7 +571,9 @@
       "usage_time": "25:55",
       "next_exchange_time": "26108:43",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "19574:05",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -483,7 +581,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "14",
@@ -510,7 +614,9 @@
       "usage_time": "25:55",
       "next_exchange_time": "26108:43",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "19574:05",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -518,7 +624,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "15",
@@ -545,7 +657,9 @@
       "usage_time": "",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -553,7 +667,13 @@
       "has_interval": false,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "16",
@@ -580,7 +700,9 @@
       "usage_time": "1448:14",
       "next_exchange_time": "10086:24",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "3551:46",
+      "remaining_days": "",
       "note": "178행 필히 참조. 시간 오류",
       "note_editable": true,
       "overdue": false,
@@ -588,7 +710,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "17",
@@ -615,7 +743,9 @@
       "usage_time": "3388:56",
       "next_exchange_time": "43145:42",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "36611:04",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -623,7 +753,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "18",
@@ -650,7 +786,9 @@
       "usage_time": "1448:14",
       "next_exchange_time": "10086:24",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "3551:46",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -658,7 +796,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "19",
@@ -685,7 +829,9 @@
       "usage_time": "25:55",
       "next_exchange_time": "7758:43",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "1224:05",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -693,7 +839,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "20",
@@ -720,7 +872,9 @@
       "usage_time": "",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -728,7 +882,13 @@
       "has_interval": false,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "21",
@@ -755,7 +915,9 @@
       "usage_time": "1448:14",
       "next_exchange_time": "10086:24",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "3551:46",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -763,7 +925,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "22",
@@ -790,7 +958,9 @@
       "usage_time": "3388:56",
       "next_exchange_time": "43145:42",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "36611:04",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -798,7 +968,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "23",
@@ -825,7 +1001,9 @@
       "usage_time": "1448:14",
       "next_exchange_time": "10086:24",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "3551:46",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -833,7 +1011,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "24",
@@ -860,7 +1044,9 @@
       "usage_time": "25:55",
       "next_exchange_time": "7758:43",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "1224:05",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -868,7 +1054,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "25",
@@ -895,7 +1087,9 @@
       "usage_time": "",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -903,7 +1097,13 @@
       "has_interval": false,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "26",
@@ -930,7 +1130,9 @@
       "usage_time": "2057:14",
       "next_exchange_time": "9477:24",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "2942:46",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -938,7 +1140,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "27",
@@ -965,7 +1173,9 @@
       "usage_time": "3388:56",
       "next_exchange_time": "43145:42",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "36611:04",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -973,7 +1183,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 1331.7
+      "baseline_value": 1331.7,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "28",
@@ -1000,7 +1216,9 @@
       "usage_time": "2057:14",
       "next_exchange_time": "9477:24",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "2942:46",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1008,7 +1226,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "29",
@@ -1035,7 +1259,9 @@
       "usage_time": "25:55",
       "next_exchange_time": "7758:43",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "1224:05",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1043,7 +1269,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "30",
@@ -1070,7 +1302,9 @@
       "usage_time": "",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1078,7 +1312,13 @@
       "has_interval": false,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "31",
@@ -1105,7 +1345,9 @@
       "usage_time": "2058:14",
       "next_exchange_time": "9476:24",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "2941:46",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1113,7 +1355,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 1.0
+      "baseline_value": 1.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "32",
@@ -1140,7 +1388,9 @@
       "usage_time": "3388:56",
       "next_exchange_time": "43145:42",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "36611:04",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1148,7 +1398,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 1331.7
+      "baseline_value": 1331.7,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "33",
@@ -1175,7 +1431,9 @@
       "usage_time": "2058:14",
       "next_exchange_time": "9476:24",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "2941:46",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1183,7 +1441,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 1.0
+      "baseline_value": 1.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "34",
@@ -1210,7 +1474,9 @@
       "usage_time": "25:55",
       "next_exchange_time": "7758:43",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "1224:05",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1218,7 +1484,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "35",
@@ -1245,7 +1517,9 @@
       "usage_time": "886:50",
       "next_exchange_time": "O/C",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1253,7 +1527,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "36",
@@ -1280,7 +1560,9 @@
       "usage_time": "1865:47",
       "next_exchange_time": "8418:51",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "1884:13",
+      "remaining_days": "",
       "note": "23. Main Gear Box part numbers 76351-09500-041, -043, -044 must be modified at next overhaul to 76351-09500-045.\n\n25. Main Gear Box part number 76351-09500-041, -043, -044, and 76351-09600-043, -044, -045, and -047 must be removed from service not later than 12/31/2034.",
       "note_editable": true,
       "overdue": false,
@@ -1288,7 +1570,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 978.95
+      "baseline_value": 978.95,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "37",
@@ -1315,7 +1603,9 @@
       "usage_time": "1865:47",
       "next_exchange_time": "13868:51",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "7334:13",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1323,7 +1613,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 978.95
+      "baseline_value": 978.95,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "38",
@@ -1350,7 +1646,9 @@
       "usage_time": "9728:17",
       "next_exchange_time": "11706:21",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "5171:43",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1358,7 +1656,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 8841.45
+      "baseline_value": 8841.45,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "39",
@@ -1385,7 +1689,9 @@
       "usage_time": "18400:36",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1393,7 +1699,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "40",
@@ -1420,7 +1732,9 @@
       "usage_time": "18400:36",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1428,7 +1742,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "41",
@@ -1455,7 +1775,9 @@
       "usage_time": "4321:35",
       "next_exchange_time": "12613:03",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "6078:25",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1463,7 +1785,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 3434.75
+      "baseline_value": 3434.75,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "42",
@@ -1490,7 +1818,9 @@
       "usage_time": "4321:35",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "OC",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1498,7 +1828,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "43",
@@ -1525,7 +1861,9 @@
       "usage_time": "1865:47",
       "next_exchange_time": "24268:51",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "17734:13",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1533,7 +1871,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 978.95
+      "baseline_value": 978.95,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "44",
@@ -1560,7 +1904,9 @@
       "usage_time": "5110:41",
       "next_exchange_time": "21423:57",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "14889:19",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1568,7 +1914,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 4223.85
+      "baseline_value": 4223.85,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "45",
@@ -1595,7 +1947,9 @@
       "usage_time": "6534:38",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "OC",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1603,7 +1957,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "46",
@@ -1630,7 +1990,9 @@
       "usage_time": "6534:38",
       "next_exchange_time": "23400:00",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "16865:22",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1638,7 +2000,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "47",
@@ -1665,7 +2033,9 @@
       "usage_time": "4446:08",
       "next_exchange_time": "6588:30",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "53:52",
+      "remaining_days": "",
       "note": "17. Intermediate gear box part number 76357-05600-041 must be modified at next overhaul to 76357-05000-042.\n\n26. Intermediate Gear Box part numbers 76357-05000-041 and 76357-05600-041 must be removed from\nservice not later than 12/31/2034.",
       "note_editable": true,
       "overdue": false,
@@ -1673,7 +2043,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "48",
@@ -1700,7 +2076,9 @@
       "usage_time": "2415:50",
       "next_exchange_time": "8618:48",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "2084:10",
+      "remaining_days": "",
       "note": "19. Tail gear box part numbers 76358-05100-042, -043, -044, -045, -046, -047 must be modified at next\noverhaul to 76358-05100-048.\n\n27. Tail Gear Box part numbers 76358-05100-042, -043, -044, -045, -046, -047, and 76358-05600-041, -042 must be removed from service not later than 12/31/2034.",
       "note_editable": true,
       "overdue": false,
@@ -1708,7 +2086,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "49",
@@ -1735,7 +2119,9 @@
       "usage_time": "2415:50",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1743,7 +2129,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "50",
@@ -1770,7 +2162,9 @@
       "usage_time": "2415:50",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1778,7 +2172,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "51",
@@ -1805,7 +2205,9 @@
       "usage_time": "25:55",
       "next_exchange_time": "15608:43",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "9074:05",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1813,7 +2215,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "52",
@@ -1840,7 +2248,9 @@
       "usage_time": "6534:38",
       "next_exchange_time": "29000:00",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "22465:22",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1848,7 +2258,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 4724.0
+      "baseline_value": 4724.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "53",
@@ -1875,7 +2291,9 @@
       "usage_time": "6534:38",
       "next_exchange_time": "29000:00",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "22465:22",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1883,7 +2301,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 4724.0
+      "baseline_value": 4724.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "54",
@@ -1910,7 +2334,9 @@
       "usage_time": "15565:01",
       "next_exchange_time": "O/C",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1918,7 +2344,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "55",
@@ -1945,7 +2377,9 @@
       "usage_time": "15565:01",
       "next_exchange_time": "10969:37",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "4434:59",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1953,7 +2387,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 14330.216666666667
+      "baseline_value": 14330.216666666667,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "56",
@@ -1980,7 +2420,9 @@
       "usage_time": "15565:01",
       "next_exchange_time": "10969:37",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "4434:59",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -1988,7 +2430,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 14330.216666666667
+      "baseline_value": 14330.216666666667,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "57",
@@ -2015,7 +2463,9 @@
       "usage_time": "",
       "next_exchange_time": "O/C",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2023,7 +2473,13 @@
       "has_interval": false,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "58",
@@ -2050,7 +2506,9 @@
       "usage_time": "3600:19",
       "next_exchange_time": "14934:19",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "8399:41",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2058,7 +2516,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 2365.516666666667
+      "baseline_value": 2365.516666666667,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "59",
@@ -2085,7 +2549,9 @@
       "usage_time": "3600:19",
       "next_exchange_time": "14934:19",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "8399:41",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2093,7 +2559,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 2365.516666666667
+      "baseline_value": 2365.516666666667,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "60",
@@ -2120,7 +2592,9 @@
       "usage_time": "",
       "next_exchange_time": "O/C",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2128,7 +2602,13 @@
       "has_interval": false,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "61",
@@ -2155,7 +2635,9 @@
       "usage_time": "4447:13",
       "next_exchange_time": "22087:25",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "15552:47",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2163,7 +2645,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 2978.8
+      "baseline_value": 2978.8,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "62",
@@ -2190,7 +2678,9 @@
       "usage_time": "4447:13",
       "next_exchange_time": "22087:25",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "15552:47",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2198,7 +2688,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 2978.8
+      "baseline_value": 2978.8,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "63",
@@ -2225,7 +2721,9 @@
       "usage_time": "",
       "next_exchange_time": "O/C",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2233,7 +2731,13 @@
       "has_interval": false,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "64",
@@ -2260,7 +2764,9 @@
       "usage_time": "4447:13",
       "next_exchange_time": "14087:25",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "7552:47",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2268,7 +2774,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 2978.8
+      "baseline_value": 2978.8,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "65",
@@ -2295,7 +2807,9 @@
       "usage_time": "4447:13",
       "next_exchange_time": "14087:25",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "7552:47",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2303,7 +2817,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 2978.8
+      "baseline_value": 2978.8,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "66",
@@ -2330,7 +2850,9 @@
       "usage_time": "266:35",
       "next_exchange_time": "9268:03",
       "next_exchange_date": "2028-02-07",
+      "next_exchange_date_iso": "2028-02-07",
       "remaining_time": "2733:25",
+      "remaining_days": "538",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2338,7 +2860,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": true,
+      "date_interval_days": 1825,
+      "date_interval_days_editable": true,
+      "date_mode": "ac",
+      "date_baseline_offset_days": 0,
+      "date_baseline_override_iso": null
     },
     {
       "no": "67",
@@ -2365,7 +2893,9 @@
       "usage_time": "266:35",
       "next_exchange_time": "9268:03",
       "next_exchange_date": "2028-02-07",
+      "next_exchange_date_iso": "2028-02-07",
       "remaining_time": "2733:25",
+      "remaining_days": "538",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2373,7 +2903,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": true,
+      "date_interval_days": 1825,
+      "date_interval_days_editable": true,
+      "date_mode": "ac",
+      "date_baseline_offset_days": 0,
+      "date_baseline_override_iso": null
     },
     {
       "no": "68",
@@ -2400,7 +2936,9 @@
       "usage_time": "418:40",
       "next_exchange_time": "9115:58",
       "next_exchange_date": "2026-10-25",
+      "next_exchange_date_iso": "2026-10-25",
       "remaining_time": "2581:20",
+      "remaining_days": "68",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2408,7 +2946,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": true,
+      "date_interval_days": 1825,
+      "date_interval_days_editable": true,
+      "date_mode": "ac",
+      "date_baseline_offset_days": 0,
+      "date_baseline_override_iso": null
     },
     {
       "no": "69",
@@ -2435,7 +2979,9 @@
       "usage_time": "1448:14",
       "next_exchange_time": "7086:24",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "551:46",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2443,7 +2989,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "70",
@@ -2470,7 +3022,9 @@
       "usage_time": "2281:22",
       "next_exchange_time": "7253:16",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "718:38",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2478,7 +3032,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 458.73333333333335
+      "baseline_value": 458.73333333333335,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "71",
@@ -2505,7 +3065,9 @@
       "usage_time": "2281:22",
       "next_exchange_time": "41253:16",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "34718:38",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2513,7 +3075,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 458.73333333333335
+      "baseline_value": 458.73333333333335,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "72",
@@ -2540,7 +3108,9 @@
       "usage_time": "2281:22",
       "next_exchange_time": "41253:16",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "34718:38",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2548,7 +3118,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 458.73333333333335
+      "baseline_value": 458.73333333333335,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "73",
@@ -2575,7 +3151,9 @@
       "usage_time": "25:55",
       "next_exchange_time": "9508:43",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "2974:05",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2583,7 +3161,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "74",
@@ -2610,7 +3194,9 @@
       "usage_time": "25:55",
       "next_exchange_time": "43508:43",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "36974:05",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2618,7 +3204,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "75",
@@ -2645,7 +3237,9 @@
       "usage_time": "25:55",
       "next_exchange_time": "43508:43",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "36974:05",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2653,7 +3247,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "76",
@@ -2680,7 +3280,9 @@
       "usage_time": "2387:41",
       "next_exchange_time": "7146:57",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "612:19",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2688,7 +3290,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 962.3833333333333
+      "baseline_value": 962.3833333333333,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "77",
@@ -2715,7 +3323,9 @@
       "usage_time": "3018:02",
       "next_exchange_time": "40516:36",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "33981:58",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2723,7 +3333,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 1592.7333333333333
+      "baseline_value": 1592.7333333333333,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "78",
@@ -2750,7 +3366,9 @@
       "usage_time": "3018:02",
       "next_exchange_time": "40516:36",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "33981:58",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2758,7 +3376,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 1592.7333333333333
+      "baseline_value": 1592.7333333333333,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "79",
@@ -2785,7 +3409,9 @@
       "usage_time": "6534:38",
       "next_exchange_time": "13300:00",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "6765:22",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2793,7 +3419,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "80",
@@ -2820,7 +3452,9 @@
       "usage_time": "6534:38",
       "next_exchange_time": "13300:00",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "6765:22",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2828,7 +3462,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "81",
@@ -2855,7 +3495,9 @@
       "usage_time": "6534:38",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2863,7 +3505,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "82",
@@ -2890,7 +3538,9 @@
       "usage_time": "6534:38",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2898,7 +3548,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "83",
@@ -2925,7 +3581,9 @@
       "usage_time": "6534:38",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2933,7 +3591,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "84",
@@ -2960,7 +3624,9 @@
       "usage_time": "6534:38",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -2968,7 +3634,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "85",
@@ -2995,7 +3667,9 @@
       "usage_time": "6534:38",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3003,7 +3677,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "86",
@@ -3030,7 +3710,9 @@
       "usage_time": "6534:38",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3038,7 +3720,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "87",
@@ -3065,7 +3753,9 @@
       "usage_time": "1670:16",
       "next_exchange_time": "9364:22",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "2829:44",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3073,7 +3763,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "88",
@@ -3100,7 +3796,9 @@
       "usage_time": "885:38",
       "next_exchange_time": "10149:00",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "3614:22",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3108,7 +3806,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "89",
@@ -3135,7 +3839,9 @@
       "usage_time": "3334:26",
       "next_exchange_time": "7700:12",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "1165:34",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3143,7 +3849,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "90",
@@ -3170,7 +3882,9 @@
       "usage_time": "1091:06",
       "next_exchange_time": "9943:32",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "3408:54",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3178,7 +3892,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 5.4
+      "baseline_value": 5.4,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "91",
@@ -3205,7 +3925,9 @@
       "usage_time": "970:16",
       "next_exchange_time": "10064:22",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "3529:44",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3213,7 +3935,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "92",
@@ -3240,7 +3968,9 @@
       "usage_time": "1014:10",
       "next_exchange_time": "10020:28",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "3485:50",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3248,7 +3978,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "93",
@@ -3275,7 +4011,9 @@
       "usage_time": "6534:38",
       "next_exchange_time": "O/C",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3283,7 +4021,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "94",
@@ -3310,7 +4054,9 @@
       "usage_time": "6534:38",
       "next_exchange_time": "O/C",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3318,7 +4064,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "95",
@@ -3345,7 +4097,9 @@
       "usage_time": "21904",
       "next_exchange_time": "89217",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "81596",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3353,7 +4107,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 20069
+      "baseline_value": 20069,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "96",
@@ -3380,7 +4140,9 @@
       "usage_time": "21904",
       "next_exchange_time": "165717",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "158096",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3388,7 +4150,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 20069
+      "baseline_value": 20069,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "97",
@@ -3415,7 +4183,9 @@
       "usage_time": "18704",
       "next_exchange_time": "87917",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "80296",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3423,7 +4193,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 16869
+      "baseline_value": 16869,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "98",
@@ -3450,7 +4226,9 @@
       "usage_time": "",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3458,7 +4236,13 @@
       "has_interval": false,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "99",
@@ -3485,7 +4269,9 @@
       "usage_time": "13912",
       "next_exchange_time": "54459",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "46838",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3493,7 +4279,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 10072
+      "baseline_value": 10072,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "100",
@@ -3520,7 +4312,9 @@
       "usage_time": "14609",
       "next_exchange_time": "154463",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "146842",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3528,7 +4322,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 10769
+      "baseline_value": 10769,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "101",
@@ -3555,7 +4355,9 @@
       "usage_time": "14609",
       "next_exchange_time": "137012",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "129391",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3563,7 +4365,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 10769
+      "baseline_value": 10769,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "102",
@@ -3590,7 +4398,9 @@
       "usage_time": "3308",
       "next_exchange_time": "228561",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "220940",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3598,7 +4408,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 0
+      "baseline_value": 0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "103",
@@ -3625,7 +4441,9 @@
       "usage_time": "",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3633,7 +4451,13 @@
       "has_interval": false,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "104",
@@ -3660,7 +4484,9 @@
       "usage_time": "18750",
       "next_exchange_time": "20821",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "13200",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3668,7 +4494,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 15740
+      "baseline_value": 15740,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "105",
@@ -3695,7 +4527,9 @@
       "usage_time": "18750",
       "next_exchange_time": "137371",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "129750",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3703,7 +4537,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 15740
+      "baseline_value": 15740,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "106",
@@ -3730,7 +4570,9 @@
       "usage_time": "2855",
       "next_exchange_time": "40766",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "33145",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3738,7 +4580,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 0
+      "baseline_value": 0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "107",
@@ -3765,7 +4613,9 @@
       "usage_time": "",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3773,7 +4623,13 @@
       "has_interval": false,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "108",
@@ -3800,7 +4656,9 @@
       "usage_time": "",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3808,7 +4666,13 @@
       "has_interval": false,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "109",
@@ -3835,7 +4699,9 @@
       "usage_time": "14787",
       "next_exchange_time": "100834",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "93213",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3843,7 +4709,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 14552
+      "baseline_value": 14552,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "110",
@@ -3870,7 +4742,9 @@
       "usage_time": "83935",
       "next_exchange_time": "52386",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "44765",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3878,7 +4752,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 83700
+      "baseline_value": 83700,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "111",
@@ -3905,7 +4785,9 @@
       "usage_time": "14777",
       "next_exchange_time": "26144",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "18523",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3913,7 +4795,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 14542
+      "baseline_value": 14542,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "112",
@@ -3940,7 +4828,9 @@
       "usage_time": "15479",
       "next_exchange_time": "64142",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "56521",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3948,7 +4838,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 11843
+      "baseline_value": 11843,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "113",
@@ -3975,7 +4871,9 @@
       "usage_time": "16379",
       "next_exchange_time": "103742",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "96121",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -3983,7 +4881,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 12743
+      "baseline_value": 12743,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "114",
@@ -4010,7 +4914,9 @@
       "usage_time": "16379",
       "next_exchange_time": "98630",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "91009",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4018,7 +4924,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 12743
+      "baseline_value": 12743,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "115",
@@ -4045,7 +4957,9 @@
       "usage_time": "14787",
       "next_exchange_time": "113564",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "105943",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4053,7 +4967,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 14552
+      "baseline_value": 14552,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "116",
@@ -4080,7 +5000,9 @@
       "usage_time": "9695",
       "next_exchange_time": "51602",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "43981",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4088,7 +5010,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 9460
+      "baseline_value": 9460,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "117",
@@ -4115,7 +5043,9 @@
       "usage_time": "16379",
       "next_exchange_time": "198242",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "190621",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4123,7 +5053,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 12743
+      "baseline_value": 12743,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "118",
@@ -4150,7 +5086,9 @@
       "usage_time": "16379",
       "next_exchange_time": "175742",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "168121",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4158,7 +5096,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 12743
+      "baseline_value": 12743,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "119",
@@ -4185,7 +5129,9 @@
       "usage_time": "50179",
       "next_exchange_time": "62652",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "55031",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4193,7 +5139,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 49944
+      "baseline_value": 49944,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "120",
@@ -4220,7 +5172,9 @@
       "usage_time": "15683",
       "next_exchange_time": "53138",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "45517",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4228,7 +5182,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 12047
+      "baseline_value": 12047,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "121",
@@ -4255,7 +5215,9 @@
       "usage_time": "",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4263,7 +5225,13 @@
       "has_interval": false,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "122",
@@ -4290,7 +5258,9 @@
       "usage_time": "14593",
       "next_exchange_time": "24978",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "17357",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4298,7 +5268,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 12114
+      "baseline_value": 12114,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "123",
@@ -4325,7 +5301,9 @@
       "usage_time": "14593",
       "next_exchange_time": "141528",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "133907",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4333,7 +5311,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 12114
+      "baseline_value": 12114,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "124",
@@ -4360,7 +5344,9 @@
       "usage_time": "2479",
       "next_exchange_time": "41142",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "33521",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4368,7 +5354,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 0
+      "baseline_value": 0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "125",
@@ -4395,7 +5387,9 @@
       "usage_time": "",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4403,7 +5397,13 @@
       "has_interval": false,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "126",
@@ -4430,7 +5430,9 @@
       "usage_time": "",
       "next_exchange_time": "",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "O/C",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4438,7 +5440,13 @@
       "has_interval": false,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "127",
@@ -4465,7 +5473,9 @@
       "usage_time": "22268",
       "next_exchange_time": "93353",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "85732",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4473,7 +5483,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 21242
+      "baseline_value": 21242,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "128",
@@ -4500,7 +5516,9 @@
       "usage_time": "6310",
       "next_exchange_time": "130011",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "122390",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4508,7 +5526,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 5284
+      "baseline_value": 5284,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "129",
@@ -4535,7 +5559,9 @@
       "usage_time": "22647",
       "next_exchange_time": "18274",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "10653",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4543,7 +5569,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 21621
+      "baseline_value": 21621,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "130",
@@ -4570,7 +5602,9 @@
       "usage_time": "15304.7",
       "next_exchange_time": "64316.3",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "56695.3",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4578,7 +5612,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 7819.7
+      "baseline_value": 7819.7,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "131",
@@ -4605,7 +5645,9 @@
       "usage_time": "15305",
       "next_exchange_time": "104816",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "97195",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4613,7 +5655,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 7820
+      "baseline_value": 7820,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "132",
@@ -4640,7 +5688,9 @@
       "usage_time": "15305",
       "next_exchange_time": "99704",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "92083",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4648,7 +5698,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 7820
+      "baseline_value": 7820,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "133",
@@ -4675,7 +5731,9 @@
       "usage_time": "65027",
       "next_exchange_time": "63324",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "55703",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4683,7 +5741,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 64001
+      "baseline_value": 64001,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "134",
@@ -4710,7 +5774,9 @@
       "usage_time": "6310",
       "next_exchange_time": "54987",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "47366",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4718,7 +5784,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 5284
+      "baseline_value": 5284,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "135",
@@ -4745,7 +5817,9 @@
       "usage_time": "15305",
       "next_exchange_time": "199316",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "191695",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4753,7 +5827,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 7820
+      "baseline_value": 7820,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "136",
@@ -4780,7 +5860,9 @@
       "usage_time": "15305",
       "next_exchange_time": "176816",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "169195",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4788,7 +5870,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 7820
+      "baseline_value": 7820,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "137",
@@ -4815,7 +5903,9 @@
       "usage_time": "36627",
       "next_exchange_time": "76204",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "68583",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4823,7 +5913,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 35601
+      "baseline_value": 35601,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "138",
@@ -4850,7 +5946,9 @@
       "usage_time": "15305",
       "next_exchange_time": "53516",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "45895",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4858,7 +5956,13 @@
       "has_interval": true,
       "ref_key": "ld_cycle",
       "value_kind": "cycles",
-      "baseline_value": 7820
+      "baseline_value": 7820,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "139",
@@ -4885,7 +5989,9 @@
       "usage_time": "25:55",
       "next_exchange_time": "7508:43",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "974:05",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4893,7 +5999,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "140",
@@ -4920,7 +6032,9 @@
       "usage_time": "616:05",
       "next_exchange_time": "6918:33",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "383:55",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4928,7 +6042,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "141",
@@ -4955,7 +6075,9 @@
       "usage_time": "6534:38",
       "next_exchange_time": "",
       "next_exchange_date": "2033-02-05",
+      "next_exchange_date_iso": "2033-02-05",
       "remaining_time": "",
+      "remaining_days": "2363",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4963,7 +6085,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": true,
+      "date_interval_days": 3650,
+      "date_interval_days_editable": true,
+      "date_mode": "ac",
+      "date_baseline_offset_days": 0,
+      "date_baseline_override_iso": null
     },
     {
       "no": "142",
@@ -4990,7 +6118,9 @@
       "usage_time": "6534:38",
       "next_exchange_time": "",
       "next_exchange_date": "2030-07-01",
+      "next_exchange_date_iso": "2030-07-01",
       "remaining_time": "",
+      "remaining_days": "1413",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -4998,7 +6128,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": true,
+      "date_interval_days": 3650,
+      "date_interval_days_editable": true,
+      "date_mode": "ac",
+      "date_baseline_offset_days": 0,
+      "date_baseline_override_iso": null
     },
     {
       "no": "143",
@@ -5025,7 +6161,9 @@
       "usage_time": "6534:38",
       "next_exchange_time": "",
       "next_exchange_date": "2029-05-21",
+      "next_exchange_date_iso": "2029-05-21",
       "remaining_time": "",
+      "remaining_days": "1007",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -5033,7 +6171,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": true,
+      "date_interval_days": 1825,
+      "date_interval_days_editable": true,
+      "date_mode": "ac",
+      "date_baseline_offset_days": 0,
+      "date_baseline_override_iso": null
     },
     {
       "no": "144",
@@ -5060,7 +6204,9 @@
       "usage_time": "",
       "next_exchange_time": "",
       "next_exchange_date": "2027-09-18",
+      "next_exchange_date_iso": "2027-09-18",
       "remaining_time": "",
+      "remaining_days": "396",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -5068,7 +6214,13 @@
       "has_interval": false,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": true,
+      "date_interval_days": 1825,
+      "date_interval_days_editable": true,
+      "date_mode": "ac",
+      "date_baseline_offset_days": 0,
+      "date_baseline_override_iso": null
     },
     {
       "no": "145",
@@ -5095,7 +6247,9 @@
       "usage_time": "",
       "next_exchange_time": "",
       "next_exchange_date": "2027-09-18",
+      "next_exchange_date_iso": "2027-09-18",
       "remaining_time": "",
+      "remaining_days": "396",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -5103,7 +6257,13 @@
       "has_interval": false,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": true,
+      "date_interval_days": 1825,
+      "date_interval_days_editable": true,
+      "date_mode": "ac",
+      "date_baseline_offset_days": 0,
+      "date_baseline_override_iso": null
     },
     {
       "no": "146",
@@ -5130,7 +6290,9 @@
       "usage_time": "6534:38",
       "next_exchange_time": "",
       "next_exchange_date": "2028-08-05",
+      "next_exchange_date_iso": "2028-08-05",
       "remaining_time": "",
+      "remaining_days": "718",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -5138,7 +6300,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": true,
+      "date_interval_days": 1825,
+      "date_interval_days_editable": true,
+      "date_mode": "ac",
+      "date_baseline_offset_days": 0,
+      "date_baseline_override_iso": null
     },
     {
       "no": "147",
@@ -5165,7 +6333,9 @@
       "usage_time": "12462:38",
       "next_exchange_time": "",
       "next_exchange_date": "2031-01-30",
+      "next_exchange_date_iso": "2031-01-30",
       "remaining_time": "",
+      "remaining_days": "1626",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -5173,7 +6343,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": true,
+      "date_interval_days": 3650,
+      "date_interval_days_editable": true,
+      "date_mode": "ac",
+      "date_baseline_offset_days": 0,
+      "date_baseline_override_iso": null
     },
     {
       "no": "148",
@@ -5200,7 +6376,9 @@
       "usage_time": "6534:38",
       "next_exchange_time": "",
       "next_exchange_date": "2027-03-28",
+      "next_exchange_date_iso": "2027-03-28",
       "remaining_time": "",
+      "remaining_days": "222",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -5208,7 +6386,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": true,
+      "date_interval_days": 3650,
+      "date_interval_days_editable": true,
+      "date_mode": "ac",
+      "date_baseline_offset_days": 0,
+      "date_baseline_override_iso": null
     },
     {
       "no": "149",
@@ -5235,7 +6419,9 @@
       "usage_time": "140:05",
       "next_exchange_time": "7894:33",
       "next_exchange_date": "2026-07-12",
+      "next_exchange_date_iso": "2026-07-12",
       "remaining_time": "1359:55",
+      "remaining_days": "-37",
       "note": "",
       "note_editable": true,
       "overdue": true,
@@ -5243,7 +6429,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": true,
+      "date_interval_days": 730,
+      "date_interval_days_editable": true,
+      "date_mode": "ac",
+      "date_baseline_offset_days": 0,
+      "date_baseline_override_iso": null
     },
     {
       "no": "150",
@@ -5270,7 +6462,9 @@
       "usage_time": "57:00",
       "next_exchange_time": "9477:38",
       "next_exchange_date": "2030-07-17",
+      "next_exchange_date_iso": "2030-07-17",
       "remaining_time": "2943:00",
+      "remaining_days": "1429",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -5278,7 +6472,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": true,
+      "date_interval_days": 1825,
+      "date_interval_days_editable": true,
+      "date_mode": "ac",
+      "date_baseline_offset_days": 0,
+      "date_baseline_override_iso": null
     },
     {
       "no": "151",
@@ -5305,7 +6505,9 @@
       "usage_time": "291:25",
       "next_exchange_time": "",
       "next_exchange_date": "2027-10-13",
+      "next_exchange_date_iso": "2027-10-13",
       "remaining_time": "",
+      "remaining_days": "421",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -5313,7 +6515,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": true,
+      "date_interval_days": 1825,
+      "date_interval_days_editable": true,
+      "date_mode": "ac",
+      "date_baseline_offset_days": 0,
+      "date_baseline_override_iso": null
     },
     {
       "no": "152",
@@ -5340,7 +6548,9 @@
       "usage_time": "556:26",
       "next_exchange_time": "",
       "next_exchange_date": "2030-08-16",
+      "next_exchange_date_iso": "2030-08-16",
       "remaining_time": "",
+      "remaining_days": "1459",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -5348,7 +6558,13 @@
       "has_interval": true,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": true,
+      "date_interval_days": 5475,
+      "date_interval_days_editable": true,
+      "date_mode": "ac",
+      "date_baseline_offset_days": 0,
+      "date_baseline_override_iso": null
     },
     {
       "no": "153",
@@ -5375,7 +6591,9 @@
       "usage_time": "",
       "next_exchange_time": "",
       "next_exchange_date": "2027-08-31",
+      "next_exchange_date_iso": "2027-08-31",
       "remaining_time": "",
+      "remaining_days": "378",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -5383,7 +6601,13 @@
       "has_interval": false,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "154",
@@ -5410,7 +6634,9 @@
       "usage_time": "2833:20",
       "next_exchange_time": "6701:18",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "166:40",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -5418,7 +6644,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "155",
@@ -5445,7 +6677,9 @@
       "usage_time": "140:05",
       "next_exchange_time": "9394:33",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "2859:55",
+      "remaining_days": "",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -5453,7 +6687,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "",
@@ -5480,7 +6720,9 @@
       "usage_time": "",
       "next_exchange_time": "",
       "next_exchange_date": "2026-05-30",
+      "next_exchange_date_iso": "2026-05-30",
       "remaining_time": "",
+      "remaining_days": "-80",
       "note": "",
       "note_editable": true,
       "overdue": true,
@@ -5488,7 +6730,13 @@
       "has_interval": false,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": 2190,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "",
@@ -5515,7 +6763,9 @@
       "usage_time": "",
       "next_exchange_time": "",
       "next_exchange_date": "2026-05-30",
+      "next_exchange_date_iso": "2026-05-30",
       "remaining_time": "",
+      "remaining_days": "-80",
       "note": "",
       "note_editable": true,
       "overdue": true,
@@ -5523,7 +6773,13 @@
       "has_interval": false,
       "ref_key": null,
       "value_kind": null,
-      "baseline_value": null
+      "baseline_value": null,
+      "date_recalc": false,
+      "date_interval_days": 2190,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     },
     {
       "no": "",
@@ -5550,7 +6806,9 @@
       "usage_time": "524:38",
       "next_exchange_time": "7510:00",
       "next_exchange_date": "2023-07-03",
+      "next_exchange_date_iso": "2023-07-03",
       "remaining_time": "975:22",
+      "remaining_days": "-1142",
       "note": "",
       "note_editable": true,
       "overdue": true,
@@ -5558,7 +6816,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 0.0
+      "baseline_value": 0.0,
+      "date_recalc": true,
+      "date_interval_days": 1095,
+      "date_interval_days_editable": true,
+      "date_mode": "ac",
+      "date_baseline_offset_days": 0,
+      "date_baseline_override_iso": null
     },
     {
       "no": "",
@@ -5585,7 +6849,9 @@
       "usage_time": "4349:38",
       "next_exchange_time": "7185:00",
       "next_exchange_date": "",
+      "next_exchange_date_iso": null,
       "remaining_time": "650:22",
+      "remaining_days": "CUFF의 실제교환주기임. \n\n위 엑셀 상 CUFF는 CHR 실물 분실로인한 임의기재",
       "note": "",
       "note_editable": true,
       "overdue": false,
@@ -5593,7 +6859,13 @@
       "has_interval": true,
       "ref_key": "ac_tsn_hours",
       "value_kind": "hours",
-      "baseline_value": 2901.4
+      "baseline_value": 2901.4,
+      "date_recalc": false,
+      "date_interval_days": null,
+      "date_interval_days_editable": true,
+      "date_mode": null,
+      "date_baseline_offset_days": null,
+      "date_baseline_override_iso": null
     }
   ]
 }
