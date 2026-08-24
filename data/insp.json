@@ -15,7 +15,12 @@
     "ac_tsn_hours": 6534.633333333333,
     "eng1_tsn_hours": 8344.616666666667,
     "eng2_tsn_hours": 10949.433333333332,
-    "today": "2026-08-18"
+    "today": "2026-08-18",
+    "ld_cycle": 7621,
+    "eng1_gg_cyc": 13904.56,
+    "eng1_pt_cyc": 14146.58,
+    "eng2_gg_cyc": 11742.06,
+    "eng2_pt_cyc": 12497.23
   },
   "sections": [
     {
