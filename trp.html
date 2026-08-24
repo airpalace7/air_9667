@@ -12,6 +12,7 @@
   <div class="top-right">
     <button id="printBtn" class="print-btn" title="인쇄">🖨 인쇄</button>
     <div class="header-date" id="headerDate"></div>
+    <button id="adminToggleBtn" class="admin-btn">관리자 모드</button>
     <nav class="tabs">
     <a href="index.html">목차</a>
     <a href="insp.html">01 메인정비표</a>
@@ -22,8 +23,24 @@
   </div>
 </header>
 <main>
+  <div id="connectPanel" class="connect-panel" style="display:none">
+    <div class="connect-row">
+      <label>GitHub 계정<input id="ghOwner" placeholder="예: airpalace7"></label>
+      <label>저장소 이름<input id="ghRepo" placeholder="예: air_9667"></label>
+      <label>Personal Access Token<input id="ghToken" type="password" placeholder="repo 쓰기 권한 토큰"></label>
+      <button id="ghConnectBtn">연결</button>
+    </div>
+    <div class="connect-hint">토큰은 이 브라우저에만 저장돼요(01 메인정비표에서 이미 연결하셨다면 자동으로 불러와요). 발급: GitHub → Settings → Developer settings → Personal access tokens (repo 권한 체크)</div>
+    <div id="connectMsg" class="connect-msg"></div>
+  </div>
+
   <div id="info" class="info-bar"></div>
   <div id="content"><div class="loading">불러오는 중...</div></div>
+
+  <div id="saveBar" class="save-bar" style="display:none">
+    <button id="saveBtn">변경사항 저장 (GitHub에 커밋)</button>
+    <span id="saveMsg" class="save-msg"></span>
+  </div>
 </main>
 <script src="component.js" data-src="data/trp.json"></script>
 </body>

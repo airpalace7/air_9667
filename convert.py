@@ -129,6 +129,11 @@ def convert_insp(ws, ws_formula):
         "ac_tsn_hours": hours_of(ws["B3"].value),
         "eng1_tsn_hours": hours_of(ws["F2"].value),
         "eng2_tsn_hours": hours_of(ws["H2"].value),
+        "ld_cycle": ws["D3"].value if isinstance(ws["D3"].value, (int, float)) else None,
+        "eng1_gg_cyc": ws["F3"].value if isinstance(ws["F3"].value, (int, float)) else None,
+        "eng1_pt_cyc": ws["F4"].value if isinstance(ws["F4"].value, (int, float)) else None,
+        "eng2_gg_cyc": ws["H3"].value if isinstance(ws["H3"].value, (int, float)) else None,
+        "eng2_pt_cyc": ws["H4"].value if isinstance(ws["H4"].value, (int, float)) else None,
         "today": date_iso(ws["L2"].value),
     }
     sections = []
@@ -236,7 +241,31 @@ def convert_insp(ws, ws_formula):
     return {"info": info, "raw": raw, "sections": sections}
 
 
-def convert_component(ws, header_rows_end, data_start):
+def classify_component_row(ws_formula, r):
+    """부품/엔진 시트 한 행의 usage_time(13열)/next_exchange_time(15열)/remaining_time(17열)이
+    표준 패턴(=SUM($C$기준행-H+K또는L), =SUM(H+F-K또는L), =SUM(O-$C$기준행))을 따르는지 확인한다.
+    따르면 웹에서 값을 수정했을 때 실시간으로 재계산할 수 있고(recalc=True),
+    아니면(참조 열이 서로 안 맞거나 아예 다른 형태면) 엑셀 계산값을 그대로 두고 편집을 막는다.
+    """
+    v13 = ws_formula.cell(r, 13).value
+    v15 = ws_formula.cell(r, 15).value
+    v17 = ws_formula.cell(r, 17).value
+
+    m13 = re.match(r'^=SUM\(\$C\$(\d+)-H\d+\+([KL])\d+\)$', v13) if is_formula(v13) else None
+    m15 = re.match(r'^=SUM\(H\d+\+F\d+-([KL])\d+\)$', v15) if is_formula(v15) else None
+    m17 = re.match(r'^=SUM\(O\d+-\$C\$(\d+)\)$', v17) if is_formula(v17) else None
+
+    has_interval = is_formula(v13) or is_formula(v15) or is_formula(v17)
+    recalc = bool(m13 and m15 and m17 and m13.group(2) == m15.group(1) and m13.group(1) == m17.group(1))
+    ref_row = int(m13.group(1)) if recalc else None
+    baseline_col = m13.group(2) if recalc else None
+    return recalc, has_interval, ref_row, baseline_col
+
+
+def convert_component(ws, ws_formula, header_rows_end, data_start, ref_map):
+    """ref_map: {기준행번호: (insp.json raw의 키 이름, 'hours'|'cycles')}
+    예: AC TRP는 {2: ('ac_tsn_hours','hours'), 3: ('ld_cycle','cycles')}
+    """
     info_lines = []
     for r in range(1, header_rows_end):
         b = ws.cell(r, 2).value
@@ -260,23 +289,64 @@ def convert_component(ws, header_rows_end, data_start):
             today_dt = today_cell if isinstance(today_cell, datetime.datetime) else datetime.datetime.now()
             if next_date_raw < today_dt:
                 overdue = True
+
+        recalc, has_interval, ref_row, baseline_col = classify_component_row(ws_formula, r)
+        ref_key, value_kind = (None, None)
+        if ref_row is not None and ref_row in ref_map:
+            ref_key, value_kind = ref_map[ref_row]
+        else:
+            recalc = False  # 알 수 없는 기준행이면 재계산하지 않음(엑셀관리)
+
+        installation_time_raw = ws.cell(r, 8).value
+        exchange_cycle_raw = ws.cell(r, 6).value
+        baseline_raw = ws.cell(r, 11 if baseline_col == "K" else 12).value if baseline_col else None
+
+        def numeric_of(v):
+            if isinstance(v, datetime.timedelta):
+                return hours_of(v)
+            if isinstance(v, (int, float)):
+                return v
+            return None
+
+        # 참조 대상 다른 행의 값(=D41 같은 단순 참조) 여부 - 있으면 편집 불가
+        name_ref = ref_info(ws, ws_formula.cell(r, 2).value)
+        pn_ref = ref_info(ws, ws_formula.cell(r, 3).value)
+        sn_ref = ref_info(ws, ws_formula.cell(r, 4).value)
+
         rows.append({
             "no": fmt_val(no)[0],
             "name": fmt_val(name)[0],
+            "name_editable": name_ref is None and not is_formula(ws_formula.cell(r, 2).value),
             "pn": fmt_val(ws.cell(r, 3).value)[0],
+            "pn_editable": pn_ref is None and not is_formula(ws_formula.cell(r, 3).value),
             "sn": fmt_val(ws.cell(r, 4).value)[0],
+            "sn_editable": sn_ref is None and not is_formula(ws_formula.cell(r, 4).value),
             "type": fmt_val(ws.cell(r, 5).value)[0],
-            "exchange_cycle": fmt_val(ws.cell(r, 6).value)[0],
-            "installation_time": fmt_val(ws.cell(r, 8).value)[0],
+            "type_editable": not is_formula(ws_formula.cell(r, 5).value),
+            "exchange_cycle": fmt_val(exchange_cycle_raw)[0],
+            "exchange_cycle_num": numeric_of(exchange_cycle_raw),
+            "exchange_cycle_editable": ref_info(ws, ws_formula.cell(r, 6).value) is None,
+            "installation_time": fmt_val(installation_time_raw)[0],
+            "installation_time_num": numeric_of(installation_time_raw),
+            "installation_time_editable": ref_info(ws, ws_formula.cell(r, 8).value) is None,
             "installation_date": fmt_val(ws.cell(r, 9).value)[0],
+            "installation_date_iso": date_iso(ws.cell(r, 9).value),
+            "installation_date_editable": ref_info(ws, ws_formula.cell(r, 9).value) is None,
             "location": fmt_val(ws.cell(r, 10).value)[0],
+            "location_editable": ref_info(ws, ws_formula.cell(r, 10).value) is None,
             "tsn": fmt_val(ws.cell(r, 11).value)[0],
             "usage_time": fmt_val(ws.cell(r, 13).value)[0],
             "next_exchange_time": fmt_val(ws.cell(r, 15).value)[0],
             "next_exchange_date": fmt_val(ws.cell(r, 16).value)[0],
             "remaining_time": remaining_time,
             "note": fmt_val(ws.cell(r, 19).value)[0],
+            "note_editable": ref_info(ws, ws_formula.cell(r, 19).value) is None,
             "overdue": overdue,
+            "recalc": recalc,
+            "has_interval": has_interval,
+            "ref_key": ref_key,
+            "value_kind": value_kind,
+            "baseline_value": numeric_of(baseline_raw),
         })
     return {"info": info_lines, "rows": rows}
 
@@ -296,15 +366,24 @@ def main():
     with open(f"{OUT_DIR}/insp.json", "w", encoding="utf-8") as f:
         json.dump(data_insp, f, ensure_ascii=False, indent=2)
 
-    data_trp = convert_component(wb["AC TRP, TBO"], header_rows_end=9, data_start=10)
+    data_trp = convert_component(
+        wb["AC TRP, TBO"], wb_formula["AC TRP, TBO"], header_rows_end=9, data_start=10,
+        ref_map={2: ("ac_tsn_hours", "hours"), 3: ("ld_cycle", "cycles")},
+    )
     with open(f"{OUT_DIR}/trp.json", "w", encoding="utf-8") as f:
         json.dump(data_trp, f, ensure_ascii=False, indent=2)
 
-    data_eng1 = convert_component(wb["#1 ENG TRP, TBO"], header_rows_end=10, data_start=12)
+    data_eng1 = convert_component(
+        wb["#1 ENG TRP, TBO"], wb_formula["#1 ENG TRP, TBO"], header_rows_end=10, data_start=12,
+        ref_map={6: ("eng1_tsn_hours", "hours"), 7: ("eng1_gg_cyc", "cycles"), 8: ("eng1_pt_cyc", "cycles")},
+    )
     with open(f"{OUT_DIR}/eng1.json", "w", encoding="utf-8") as f:
         json.dump(data_eng1, f, ensure_ascii=False, indent=2)
 
-    data_eng2 = convert_component(wb["#2 ENG TRP, TBO"], header_rows_end=10, data_start=12)
+    data_eng2 = convert_component(
+        wb["#2 ENG TRP, TBO"], wb_formula["#2 ENG TRP, TBO"], header_rows_end=10, data_start=12,
+        ref_map={6: ("eng2_tsn_hours", "hours"), 7: ("eng2_gg_cyc", "cycles"), 8: ("eng2_pt_cyc", "cycles")},
+    )
     with open(f"{OUT_DIR}/eng2.json", "w", encoding="utf-8") as f:
         json.dump(data_eng2, f, ensure_ascii=False, indent=2)
 

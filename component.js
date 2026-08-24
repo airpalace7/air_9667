@@ -2,12 +2,103 @@
   const scriptEl = document.currentScript;
   const src = scriptEl.getAttribute('data-src');
   let DATA = null;
+  let REFS = {};       // 01 메인정비표(insp.json)에서 가져온 현재 기준값들
+  let FILE_SHA = null;
+  let ADMIN = false;
 
   function escapeHtml(s) {
     if (s === null || s === undefined) return '';
     return String(s).replace(/[&<>"']/g, c => ({
       '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
     }[c]));
+  }
+
+  function hoursToStr(h) {
+    if (h === null || h === undefined || isNaN(h)) return '';
+    const neg = h < 0;
+    h = Math.abs(h);
+    const totalHours = Math.floor(h + 1e-9);
+    const mins = Math.round((h - totalHours) * 60);
+    return (neg ? '-' : '') + totalHours + ':' + String(mins).padStart(2, '0');
+  }
+
+  // "1234:56" 같은 hhhh:mm 문자열을 소수 시간으로 변환. 숫자만 입력해도 허용.
+  function parseHoursStr(s) {
+    if (s === null || s === undefined) return NaN;
+    s = String(s).trim();
+    if (s === '' || s === '-') return NaN;
+    const neg = s.startsWith('-');
+    if (neg) s = s.slice(1);
+    const m = s.match(/^(\d+):([0-5]?\d)$/);
+    if (m) {
+      const h = parseInt(m[1], 10);
+      const mm = parseInt(m[2], 10);
+      return (neg ? -1 : 1) * (h + mm / 60);
+    }
+    const f = parseFloat(s);
+    return isNaN(f) ? NaN : (neg ? -1 : 1) * Math.abs(f);
+  }
+
+  // "2026-3-19" 처럼 구분자/자릿수가 느슨해도 "YYYY-MM-DD"로 정규화.
+  function parseDateStr(s) {
+    if (s === null || s === undefined) return null;
+    s = String(s).trim();
+    if (s === '') return null;
+    const m = s.match(/^(\d{4})[-./](\d{1,2})[-./](\d{1,2})$/);
+    if (!m) return null;
+    return `${m[1]}-${m[2].padStart(2, '0')}-${m[3].padStart(2, '0')}`;
+  }
+
+  // 시간(hours)/사이클(cycles) 값 종류에 따라 표시 문자열을 다르게 만든다.
+  function formatByKind(v, kind) {
+    if (v === null || v === undefined || isNaN(v)) return '';
+    if (kind === 'hours') return hoursToStr(v);
+    const rounded = Math.round(v * 100) / 100;
+    return String(rounded);
+  }
+  function parseByKind(s, kind) {
+    if (kind === 'hours') return parseHoursStr(s);
+    if (s === null || s === undefined || String(s).trim() === '') return NaN;
+    const f = parseFloat(s);
+    return isNaN(f) ? NaN : f;
+  }
+
+  // 부품/엔진 한 행의 사용시간/다음교환/잔여시간을 실시간으로 재계산한다.
+  // 표준 패턴(=SUM($C$기준행-H+K또는L) 등)을 따르는 행만(row.recalc) 계산하고,
+  // 그 외(row.has_interval만 true)는 "엑셀관리"로 표시하며 엑셀 계산값을 그대로 둔다.
+  function recomputeRow(row) {
+    if (row.installation_date_iso) {
+      row.installation_date = row.installation_date_iso;
+    }
+    if (row.installation_time_num !== null && row.installation_time_num !== undefined && !isNaN(row.installation_time_num)) {
+      row.installation_time = formatByKind(row.installation_time_num, row.value_kind);
+    }
+    if (row.exchange_cycle_num !== null && row.exchange_cycle_num !== undefined && !isNaN(row.exchange_cycle_num)) {
+      row.exchange_cycle = formatByKind(row.exchange_cycle_num, row.value_kind);
+    }
+
+    if (!row.recalc || !row.ref_key) return;
+    const refVal = REFS[row.ref_key];
+    if (refVal === undefined || refVal === null) return;
+    const install = row.installation_time_num;
+    const cycle = row.exchange_cycle_num;
+    if (install === null || install === undefined || isNaN(install)) return;
+    if (cycle === null || cycle === undefined || isNaN(cycle)) return;
+    const baseline = row.baseline_value || 0;
+
+    const usage = refVal - install + baseline;
+    const nextEx = install + cycle - baseline;
+    const remain = nextEx - refVal;
+
+    row.usage_time = formatByKind(usage, row.value_kind);
+    row.next_exchange_time = formatByKind(nextEx, row.value_kind);
+    row.remaining_time = formatByKind(remain, row.value_kind);
+    row.overdue = remain < 0;
+  }
+
+  function recomputeAll() {
+    if (!DATA) return;
+    DATA.rows.forEach(recomputeRow);
   }
 
   // 인쇄 시 각 페이지 맨 위에 자동으로 반복되도록, thead 안에 제목+등록기호 정보 두 줄을
@@ -24,12 +115,8 @@
     `;
   }
 
-  async function load() {
-    const res = await fetch(src);
-    const data = await res.json();
-    DATA = data;
-
-    const infoAll = data.info || [];
+  function renderInfo() {
+    const infoAll = DATA.info || [];
     const todayItem = infoAll.find(it => it.label === 'Today');
     const gridItems = infoAll.filter(it => it.label !== 'Today');
 
@@ -37,7 +124,6 @@
     if (dateEl) {
       dateEl.innerHTML = '기준일<strong>' + escapeHtml(todayItem ? todayItem.value : '') + '</strong>';
     }
-
     const infoEl = document.getElementById('info');
     infoEl.innerHTML = gridItems.map(item => `
       <div class="info-cell">
@@ -45,11 +131,29 @@
         <div class="v">${escapeHtml(item.value)}</div>
       </div>
     `).join('');
+    return { todayItem, gridItems };
+  }
 
+  function renderContent() {
     const contentEl = document.getElementById('content');
-    if (!data.rows || data.rows.length === 0) {
+    if (!DATA.rows || DATA.rows.length === 0) {
       contentEl.innerHTML = '<div class="empty">데이터가 없습니다.</div>';
       return;
+    }
+    const infoAll = DATA.info || [];
+    const todayItem = infoAll.find(it => it.label === 'Today');
+    const gridItems = infoAll.filter(it => it.label !== 'Today');
+
+    function editableCell(value, editable, ri, field, kind) {
+      if (!ADMIN || !editable) return escapeHtml(value);
+      if (field === 'installation_date_iso') {
+        return `<input type="text" placeholder="yyyy-mm-dd" class="cell-input" data-ri="${ri}" data-field="${field}" value="${escapeHtml(value || '')}">`;
+      }
+      if (field === 'exchange_cycle_num' || field === 'installation_time_num') {
+        const placeholder = kind === 'hours' ? 'hhhh:mm' : '숫자';
+        return `<input type="text" placeholder="${placeholder}" class="cell-input" data-ri="${ri}" data-field="${field}" value="${escapeHtml(value || '')}">`;
+      }
+      return `<input type="text" class="cell-input" data-ri="${ri}" data-field="${field}" value="${escapeHtml(value || '')}">`;
     }
 
     contentEl.innerHTML = `
@@ -64,27 +168,58 @@
           </tr>
         </thead>
         <tbody>
-          ${data.rows.map(r => `
+          ${DATA.rows.map((r, ri) => `
             <tr class="${r.overdue ? 'overdue' : ''}">
               <td>${escapeHtml(r.no)}</td>
-              <td>${escapeHtml(r.name)}${r.overdue ? '<span class="badge-overdue">초과</span>' : ''}</td>
-              <td>${escapeHtml(r.pn)}</td>
-              <td>${escapeHtml(r.sn)}</td>
-              <td>${escapeHtml(r.type)}</td>
-              <td>${escapeHtml(r.exchange_cycle)}</td>
-              <td>${escapeHtml(r.installation_date)}</td>
-              <td>${escapeHtml(r.installation_time)}</td>
-              <td>${escapeHtml(r.location)}</td>
+              <td>${ADMIN ? editableCell(r.name, r.name_editable, ri, 'name') : escapeHtml(r.name)}${r.overdue ? '<span class="badge-overdue">초과</span>' : ''}${(ADMIN && r.has_interval && !r.recalc) ? '<span class="badge-manual" title="이 항목은 자동 재계산되지 않아요. 엑셀에서 관리하세요.">엑셀관리</span>' : ''}</td>
+              <td>${editableCell(r.pn, r.pn_editable, ri, 'pn')}</td>
+              <td>${editableCell(r.sn, r.sn_editable, ri, 'sn')}</td>
+              <td>${editableCell(r.type, r.type_editable, ri, 'type')}</td>
+              <td>${editableCell(r.exchange_cycle, r.exchange_cycle_editable, ri, 'exchange_cycle_num', r.value_kind)}</td>
+              <td>${editableCell(r.installation_date_iso, r.installation_date_editable, ri, 'installation_date_iso')}</td>
+              <td>${editableCell(r.installation_time, r.installation_time_editable, ri, 'installation_time_num', r.value_kind)}</td>
+              <td>${editableCell(r.location, r.location_editable, ri, 'location')}</td>
               <td>${escapeHtml(r.tsn)}</td>
               <td>${escapeHtml(r.usage_time)}</td>
               <td>${escapeHtml(r.next_exchange_date)} ${escapeHtml(r.next_exchange_time)}</td>
               <td>${escapeHtml(r.remaining_time)}</td>
-              <td class="remark">${escapeHtml(r.note)}</td>
+              <td class="remark">${ADMIN ? `<textarea rows="1" class="cell-input remark-input" data-ri="${ri}" data-field="note">${escapeHtml(r.note || '')}</textarea>` : escapeHtml(r.note)}</td>
             </tr>
           `).join('')}
         </tbody>
       </table>
     `;
+
+    if (ADMIN) {
+      contentEl.querySelectorAll('.cell-input').forEach(inp => {
+        inp.addEventListener('change', e => {
+          const ri = +e.target.dataset.ri, field = e.target.dataset.field;
+          const row = DATA.rows[ri];
+          const raw = e.target.value;
+          if (field === 'installation_date_iso') {
+            row[field] = raw.trim() === '' ? null : parseDateStr(raw);
+          } else if (field === 'exchange_cycle_num' || field === 'installation_time_num') {
+            row[field] = raw.trim() === '' ? null : parseByKind(raw, row.value_kind);
+          } else {
+            row[field] = raw;
+          }
+          onDataChanged();
+        });
+      });
+    }
+  }
+
+  function onDataChanged() {
+    recomputeAll();
+    renderInfo();
+    renderContent();
+    markDirty();
+    updateStickyOffsets();
+  }
+
+  function markDirty() {
+    const el = document.getElementById('saveMsg');
+    if (el) el.textContent = '저장되지 않은 변경사항이 있습니다';
   }
 
   function updateStickyOffsets() {
@@ -95,8 +230,6 @@
   }
   window.addEventListener('resize', updateStickyOffsets);
 
-  // 창 크기 변경뿐 아니라, 등록기호 바가 좁은 화면에서 줄바뀜/글자 렌더링 차이로 높이가
-  // 미세하게 바뀌는 경우까지 놓치지 않도록 계속 감시한다.
   function setupResizeObservers() {
     if (typeof ResizeObserver === 'undefined') return;
     const header = document.querySelector('header.top');
@@ -105,9 +238,122 @@
     if (info) new ResizeObserver(updateStickyOffsets).observe(info);
   }
 
+  async function load() {
+    const res = await fetch(src);
+    DATA = await res.json();
+
+    // 01 메인정비표(insp.json)의 현재 기준값(A/C TSN, L/D CYCLE, ENG TSN, GG/PT CSN 등)을
+    // 가져와 계산에 쓴다. 이 값들은 01에서 관리자모드로 수정하면 여기서도 그대로 반영된다.
+    try {
+      const inspRes = await fetch('data/insp.json');
+      const inspData = await inspRes.json();
+      REFS = inspData.raw || {};
+    } catch (e) {
+      REFS = {};
+    }
+
+    recomputeAll();
+    renderInfo();
+    renderContent();
+  }
+
+  /* ---------- GitHub 연동 (01 메인정비표와 동일한 방식, 같은 계정 정보 재사용) ---------- */
+  function utf8_to_b64(str) {
+    return btoa(unescape(encodeURIComponent(str)));
+  }
+  function ghHeaders(token) {
+    return { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' };
+  }
+  async function ghFetchFile(owner, repo, token) {
+    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${src}`;
+    const res = await fetch(url, { headers: ghHeaders(token) });
+    if (!res.ok) throw new Error('저장소/토큰을 확인하세요 (' + res.status + ')');
+    const json = await res.json();
+    return json.sha;
+  }
+  async function ghSaveFile(owner, repo, token, sha, content) {
+    const url = `https://api.github.com/repos/${owner}/${repo}/contents/${src}`;
+    const res = await fetch(url, {
+      method: 'PUT',
+      headers: ghHeaders(token),
+      body: JSON.stringify({
+        message: '웹 관리자 모드에서 부품현황 업데이트',
+        content: utf8_to_b64(content),
+        sha: sha,
+        branch: 'main'
+      })
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.message || ('저장 실패 (' + res.status + ')'));
+    }
+    const json = await res.json();
+    return json.content.sha;
+  }
+
+  function setAdmin(on) {
+    ADMIN = on;
+    document.getElementById('adminToggleBtn').textContent = on ? '관리자 모드 끄기' : '관리자 모드';
+    document.getElementById('adminToggleBtn').classList.toggle('active', on);
+    document.getElementById('saveBar').style.display = on ? 'flex' : 'none';
+    renderContent();
+  }
+
   const printBtn = document.getElementById('printBtn');
-  if (printBtn) {
-    printBtn.addEventListener('click', () => window.print());
+  if (printBtn) printBtn.addEventListener('click', () => window.print());
+
+  const adminBtn = document.getElementById('adminToggleBtn');
+  if (adminBtn) {
+    adminBtn.addEventListener('click', () => {
+      if (ADMIN) { setAdmin(false); return; }
+      const panel = document.getElementById('connectPanel');
+      panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+      const savedOwner = localStorage.getItem('gh_owner');
+      const savedRepo = localStorage.getItem('gh_repo');
+      const savedToken = localStorage.getItem('gh_token');
+      if (savedOwner) document.getElementById('ghOwner').value = savedOwner;
+      if (savedRepo) document.getElementById('ghRepo').value = savedRepo;
+      if (savedToken) document.getElementById('ghToken').value = savedToken;
+    });
+  }
+
+  const ghConnectBtn = document.getElementById('ghConnectBtn');
+  if (ghConnectBtn) {
+    ghConnectBtn.addEventListener('click', async () => {
+      const owner = document.getElementById('ghOwner').value.trim();
+      const repo = document.getElementById('ghRepo').value.trim();
+      const token = document.getElementById('ghToken').value.trim();
+      const msgEl = document.getElementById('connectMsg');
+      msgEl.textContent = '확인 중...';
+      try {
+        FILE_SHA = await ghFetchFile(owner, repo, token);
+        localStorage.setItem('gh_owner', owner);
+        localStorage.setItem('gh_repo', repo);
+        localStorage.setItem('gh_token', token);
+        msgEl.textContent = '연결됨';
+        document.getElementById('connectPanel').style.display = 'none';
+        setAdmin(true);
+      } catch (err) {
+        msgEl.textContent = '오류: ' + err.message;
+      }
+    });
+  }
+
+  const saveBtn = document.getElementById('saveBtn');
+  if (saveBtn) {
+    saveBtn.addEventListener('click', async () => {
+      const owner = localStorage.getItem('gh_owner');
+      const repo = localStorage.getItem('gh_repo');
+      const token = localStorage.getItem('gh_token');
+      const saveMsg = document.getElementById('saveMsg');
+      saveMsg.textContent = '저장 중...';
+      try {
+        FILE_SHA = await ghSaveFile(owner, repo, token, FILE_SHA, JSON.stringify(DATA, null, 2));
+        saveMsg.textContent = '저장 완료 (1분 내 반영)';
+      } catch (err) {
+        saveMsg.textContent = '오류: ' + err.message;
+      }
+    });
   }
 
   load().then(updateStickyOffsets).then(setupResizeObservers).catch(err => {
