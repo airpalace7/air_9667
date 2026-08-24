@@ -63,6 +63,20 @@
     return isNaN(f) ? NaN : f;
   }
 
+  function isoDate(d) {
+    return d.toISOString().slice(0, 10);
+  }
+  function daysBetweenIso(iso1, iso2) {
+    const d1 = new Date(iso1 + 'T00:00:00Z');
+    const d2 = new Date(iso2 + 'T00:00:00Z');
+    return Math.round((d2 - d1) / 86400000);
+  }
+  function addDaysIso(iso, days) {
+    const d = new Date(iso + 'T00:00:00Z');
+    d.setUTCDate(d.getUTCDate() + days);
+    return isoDate(d);
+  }
+
   // 부품/엔진 한 행의 사용시간/다음교환/잔여시간을 실시간으로 재계산한다.
   // 표준 패턴(=SUM($C$기준행-H+K또는L) 등)을 따르는 행만(row.recalc) 계산하고,
   // 그 외(row.has_interval만 true)는 "엑셀관리"로 표시하며 엑셀 계산값을 그대로 둔다.
@@ -96,9 +110,37 @@
     row.overdue = remain < 0;
   }
 
+  // "달력 일수" 기준(예: 5년/10년마다 교환) 항목의 다음교환일/잔여일을 계산한다.
+  // 기체(AC) 시트: 다음교환일 = 장착일 + 교환일수 - 보정일수(대부분 0).
+  // 엔진(ENG) 시트: 별도 "기준 시작일"이 있으면 그 날짜를 쓰고(재장착돼도 원래 정밀점검
+  // 시점부터 계산 이어감), 없으면 장착일을 기준으로 쓴다.
+  function recomputeDateRow(row, todayIso) {
+    if (!row.date_recalc || !row.date_interval_days) return;
+    let baseIso = row.installation_date_iso;
+    if (row.date_mode === 'ac') {
+      if (!baseIso) return;
+      const nextIso = addDaysIso(baseIso, row.date_interval_days - (row.date_baseline_offset_days || 0));
+      row.next_exchange_date_iso = nextIso;
+    } else {
+      baseIso = row.date_baseline_override_iso || row.installation_date_iso;
+      if (!baseIso) return;
+      row.next_exchange_date_iso = addDaysIso(baseIso, row.date_interval_days);
+    }
+    row.next_exchange_date = row.next_exchange_date_iso;
+    if (todayIso) {
+      const remainDays = daysBetweenIso(todayIso, row.next_exchange_date_iso);
+      row.remaining_days = String(remainDays);
+      if (remainDays < 0) row.overdue = true;
+    }
+  }
+
   function recomputeAll() {
     if (!DATA) return;
-    DATA.rows.forEach(recomputeRow);
+    const todayIso = REFS.today;
+    DATA.rows.forEach(row => {
+      recomputeRow(row);
+      recomputeDateRow(row, todayIso);
+    });
   }
 
   // 인쇄 시 각 페이지 맨 위에 자동으로 반복되도록, thead 안에 제목+등록기호 정보 두 줄을
@@ -171,18 +213,21 @@
           ${DATA.rows.map((r, ri) => `
             <tr class="${r.overdue ? 'overdue' : ''}">
               <td>${escapeHtml(r.no)}</td>
-              <td>${ADMIN ? editableCell(r.name, r.name_editable, ri, 'name') : escapeHtml(r.name)}${r.overdue ? '<span class="badge-overdue">초과</span>' : ''}${(ADMIN && r.has_interval && !r.recalc) ? '<span class="badge-manual" title="이 항목은 자동 재계산되지 않아요. 엑셀에서 관리하세요.">엑셀관리</span>' : ''}</td>
+              <td>${ADMIN ? editableCell(r.name, r.name_editable, ri, 'name') : escapeHtml(r.name)}${r.overdue ? '<span class="badge-overdue">초과</span>' : ''}${(ADMIN && r.has_interval && !r.recalc) ? '<span class="badge-manual" title="이 항목은 자동 재계산되지 않아요. 엑셀에서 관리하세요.">엑셀관리</span>' : ''}${(ADMIN && r.date_interval_days !== null && !r.date_recalc) ? '<span class="badge-manual" title="교환일자 계산이 자동화되지 않아요. 엑셀에서 관리하세요.">엑셀관리(일자)</span>' : ''}</td>
               <td>${editableCell(r.pn, r.pn_editable, ri, 'pn')}</td>
               <td>${editableCell(r.sn, r.sn_editable, ri, 'sn')}</td>
               <td>${editableCell(r.type, r.type_editable, ri, 'type')}</td>
-              <td>${editableCell(r.exchange_cycle, r.exchange_cycle_editable, ri, 'exchange_cycle_num', r.value_kind)}</td>
+              <td>
+                ${editableCell(r.exchange_cycle, r.exchange_cycle_editable, ri, 'exchange_cycle_num', r.value_kind)}
+                ${(ADMIN && r.date_interval_days !== null) ? `<br><input type="text" placeholder="일수" class="cell-input" data-ri="${ri}" data-field="date_interval_days" value="${escapeHtml(r.date_interval_days)}">` : (r.date_interval_days !== null ? `<br><small>${escapeHtml(r.date_interval_days)}일</small>` : '')}
+              </td>
               <td>${editableCell(r.installation_date_iso, r.installation_date_editable, ri, 'installation_date_iso')}</td>
               <td>${editableCell(r.installation_time, r.installation_time_editable, ri, 'installation_time_num', r.value_kind)}</td>
               <td>${editableCell(r.location, r.location_editable, ri, 'location')}</td>
               <td>${escapeHtml(r.tsn)}</td>
               <td>${escapeHtml(r.usage_time)}</td>
-              <td>${escapeHtml(r.next_exchange_date)} ${escapeHtml(r.next_exchange_time)}</td>
-              <td>${escapeHtml(r.remaining_time)}</td>
+              <td>${escapeHtml(r.next_exchange_date_iso || r.next_exchange_date)} ${escapeHtml(r.next_exchange_time)}</td>
+              <td>${escapeHtml(r.remaining_time)}${(r.remaining_time && r.remaining_days) ? ' / ' : ''}${escapeHtml(r.remaining_days)}${r.remaining_days ? '일' : ''}</td>
               <td class="remark">${ADMIN ? `<textarea rows="1" class="cell-input remark-input" data-ri="${ri}" data-field="note">${escapeHtml(r.note || '')}</textarea>` : escapeHtml(r.note)}</td>
             </tr>
           `).join('')}
@@ -200,6 +245,8 @@
             row[field] = raw.trim() === '' ? null : parseDateStr(raw);
           } else if (field === 'exchange_cycle_num' || field === 'installation_time_num') {
             row[field] = raw.trim() === '' ? null : parseByKind(raw, row.value_kind);
+          } else if (field === 'date_interval_days') {
+            row[field] = raw.trim() === '' ? null : parseInt(raw, 10);
           } else {
             row[field] = raw;
           }

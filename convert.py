@@ -262,10 +262,40 @@ def classify_component_row(ws_formula, r):
     return recalc, has_interval, ref_row, baseline_col
 
 
-def convert_component(ws, ws_formula, header_rows_end, data_start, ref_map):
+def classify_date_row(ws_formula, r, sheet_kind):
+    """AC TRP/ENG 시트의 "달력 일수" 기준(next_exchange_date=16열, remain=18열) 계산이
+    표준 패턴을 따르는지 확인한다. sheet_kind: 'ac' 또는 'eng'."""
+    v7 = ws_formula.cell(r, 7).value  # 교환주기(일수)
+    v16 = ws_formula.cell(r, 16).value
+    v18 = ws_formula.cell(r, 18).value
+
+    interval_days = v7 if isinstance(v7, (int, float)) and v7 else None
+    if interval_days is None:
+        return {"date_recalc": False, "date_interval_days": None, "date_mode": None, "date_baseline_col": None}
+
+    m18 = re.match(r'^=SUM\(P\d+-\$C\$1\)$', v18) if is_formula(v18) else None
+
+    if sheet_kind == "ac":
+        m16 = re.match(r'^=SUM\(I\d+\+G\d+-([KL])\d+\)$', v16) if is_formula(v16) else None
+        date_recalc = bool(m16 and m18)
+        baseline_col = m16.group(1) if m16 else None
+    else:
+        m16 = re.match(r'^=SUM\(([IL])\d+\+G\d+\)$', v16) if is_formula(v16) else None
+        date_recalc = bool(m16 and m18)
+        baseline_col = "L"
+
+    return {
+        "date_recalc": date_recalc,
+        "date_interval_days": interval_days,
+        "date_mode": sheet_kind if date_recalc else None,
+        "date_baseline_col": baseline_col,
+    }
+
+
+def convert_component(ws, ws_formula, header_rows_end, data_start, ref_map, sheet_kind):
     """ref_map: {기준행번호: (insp.json raw의 키 이름, 'hours'|'cycles')}
     예: AC TRP는 {2: ('ac_tsn_hours','hours'), 3: ('ld_cycle','cycles')}
-    """
+    sheet_kind: 'ac' 또는 'eng' - 달력 일수 기준 계산 방식이 시트마다 달라서 구분한다."""
     info_lines = []
     for r in range(1, header_rows_end):
         b = ws.cell(r, 2).value
@@ -280,8 +310,11 @@ def convert_component(ws, ws_formula, header_rows_end, data_start, ref_map):
             continue
         remaining_time_raw = ws.cell(r, 17).value
         remaining_time, neg = fmt_val(remaining_time_raw)
+        remaining_days_raw = ws.cell(r, 18).value
         overdue = isinstance(remaining_time_raw, (int, float)) and remaining_time_raw < 0
         if isinstance(remaining_time_raw, datetime.timedelta) and remaining_time_raw.total_seconds() < 0:
+            overdue = True
+        if isinstance(remaining_days_raw, (int, float)) and remaining_days_raw < 0:
             overdue = True
         next_date_raw = ws.cell(r, 16).value
         if isinstance(next_date_raw, datetime.datetime):
@@ -296,6 +329,26 @@ def convert_component(ws, ws_formula, header_rows_end, data_start, ref_map):
             ref_key, value_kind = ref_map[ref_row]
         else:
             recalc = False  # 알 수 없는 기준행이면 재계산하지 않음(엑셀관리)
+
+        date_info = classify_date_row(ws_formula, r, sheet_kind)
+        date_baseline_offset_days = None
+        date_baseline_override_iso = None
+        if date_info["date_recalc"]:
+            bcol = date_info["date_baseline_col"]
+            braw = ws.cell(r, 11 if bcol == "K" else 12).value
+            if sheet_kind == "ac":
+                # AC TRP: 보정 "일수"(대부분 0). 엑셀 SUM()은 텍스트를 0으로 취급하므로 그대로 따름.
+                if isinstance(braw, (int, float)):
+                    date_baseline_offset_days = int(braw)
+                elif isinstance(braw, datetime.timedelta):
+                    date_baseline_offset_days = int(braw.total_seconds() // 86400)
+                else:
+                    date_baseline_offset_days = 0
+            else:
+                # ENG: 보정 셀이 실제 날짜면 "기준 시작일"로 그 날짜를 쓰고(장착일 무시),
+                # 아니면 장착일을 그대로 기준으로 쓴다.
+                if isinstance(braw, datetime.datetime):
+                    date_baseline_override_iso = date_iso(braw)
 
         installation_time_raw = ws.cell(r, 8).value
         exchange_cycle_raw = ws.cell(r, 6).value
@@ -338,7 +391,9 @@ def convert_component(ws, ws_formula, header_rows_end, data_start, ref_map):
             "usage_time": fmt_val(ws.cell(r, 13).value)[0],
             "next_exchange_time": fmt_val(ws.cell(r, 15).value)[0],
             "next_exchange_date": fmt_val(ws.cell(r, 16).value)[0],
+            "next_exchange_date_iso": date_iso(ws.cell(r, 16).value),
             "remaining_time": remaining_time,
+            "remaining_days": fmt_val(remaining_days_raw)[0],
             "note": fmt_val(ws.cell(r, 19).value)[0],
             "note_editable": ref_info(ws, ws_formula.cell(r, 19).value) is None,
             "overdue": overdue,
@@ -347,6 +402,12 @@ def convert_component(ws, ws_formula, header_rows_end, data_start, ref_map):
             "ref_key": ref_key,
             "value_kind": value_kind,
             "baseline_value": numeric_of(baseline_raw),
+            "date_recalc": date_info["date_recalc"],
+            "date_interval_days": date_info["date_interval_days"],
+            "date_interval_days_editable": ref_info(ws, ws_formula.cell(r, 7).value) is None,
+            "date_mode": date_info["date_mode"],
+            "date_baseline_offset_days": date_baseline_offset_days,
+            "date_baseline_override_iso": date_baseline_override_iso,
         })
     return {"info": info_lines, "rows": rows}
 
@@ -369,6 +430,7 @@ def main():
     data_trp = convert_component(
         wb["AC TRP, TBO"], wb_formula["AC TRP, TBO"], header_rows_end=9, data_start=10,
         ref_map={2: ("ac_tsn_hours", "hours"), 3: ("ld_cycle", "cycles")},
+        sheet_kind="ac",
     )
     with open(f"{OUT_DIR}/trp.json", "w", encoding="utf-8") as f:
         json.dump(data_trp, f, ensure_ascii=False, indent=2)
@@ -376,6 +438,7 @@ def main():
     data_eng1 = convert_component(
         wb["#1 ENG TRP, TBO"], wb_formula["#1 ENG TRP, TBO"], header_rows_end=10, data_start=12,
         ref_map={6: ("eng1_tsn_hours", "hours"), 7: ("eng1_gg_cyc", "cycles"), 8: ("eng1_pt_cyc", "cycles")},
+        sheet_kind="eng",
     )
     with open(f"{OUT_DIR}/eng1.json", "w", encoding="utf-8") as f:
         json.dump(data_eng1, f, ensure_ascii=False, indent=2)
@@ -383,6 +446,7 @@ def main():
     data_eng2 = convert_component(
         wb["#2 ENG TRP, TBO"], wb_formula["#2 ENG TRP, TBO"], header_rows_end=10, data_start=12,
         ref_map={6: ("eng2_tsn_hours", "hours"), 7: ("eng2_gg_cyc", "cycles"), 8: ("eng2_pt_cyc", "cycles")},
+        sheet_kind="eng",
     )
     with open(f"{OUT_DIR}/eng2.json", "w", encoding="utf-8") as f:
         json.dump(data_eng2, f, ensure_ascii=False, indent=2)
