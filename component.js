@@ -134,6 +134,15 @@
     }
   }
 
+  // REMAIN 칸에 넣을 데이터 막대 스타일. interval을 100%로 보고 남은 비율만큼 채운다.
+  function barStyle(remain, interval) {
+    if (remain === null || remain === undefined || isNaN(remain)) return '';
+    if (!interval || isNaN(interval) || interval <= 0) return '';
+    const pct = Math.max(0, Math.min(100, (remain / interval) * 100));
+    if (pct <= 0) return '';
+    return ` style="background: linear-gradient(to right, var(--databar) ${pct}%, transparent ${pct}%);"`;
+  }
+
   function recomputeAll() {
     if (!DATA) return;
     const todayIso = REFS.today;
@@ -227,7 +236,11 @@
               <td>${escapeHtml(r.tsn)}</td>
               <td>${escapeHtml(r.usage_time)}</td>
               <td>${escapeHtml(r.next_exchange_date_iso || r.next_exchange_date)} ${escapeHtml(r.next_exchange_time)}</td>
-              <td>${escapeHtml(r.remaining_time)}${(r.remaining_time && r.remaining_days) ? ' / ' : ''}${escapeHtml(r.remaining_days)}${r.remaining_days ? '일' : ''}</td>
+              <td${(() => {
+                if (r.recalc && r.ref_key) return barStyle(parseByKind(r.remaining_time, r.value_kind), r.exchange_cycle_num);
+                if (r.date_recalc) return barStyle(parseInt(r.remaining_days, 10), r.date_interval_days);
+                return '';
+              })()}>${escapeHtml(r.remaining_time)}${(r.remaining_time && r.remaining_days) ? ' / ' : ''}${escapeHtml(r.remaining_days)}${r.remaining_days ? '일' : ''}</td>
               <td class="remark">${ADMIN ? `<textarea rows="1" class="cell-input remark-input" data-ri="${ri}" data-field="note">${escapeHtml(r.note || '')}</textarea>` : escapeHtml(r.note)}</td>
             </tr>
           `).join('')}

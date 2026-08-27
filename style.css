@@ -16,6 +16,7 @@
   --accent-2: #b06a00;
   --danger: #e0554f;
   --danger-bg: rgba(224, 85, 79, 0.14);
+  --databar: rgba(99, 142, 198, 0.55);
   --mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
   --sans: "Pretendard", "Noto Sans KR", -apple-system, sans-serif;
 }

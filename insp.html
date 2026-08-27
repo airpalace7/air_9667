@@ -112,6 +112,16 @@ function lockedCellHtml(valueText, ref) {
   return `<span class="locked-cell" title="엑셀에 계산식(상수)으로 입력된 값이라 여기서 수정할 수 없어요. 엑셀에서 직접 고친 뒤 다시 변환해주세요.">${escapeHtml(valueText)}</span>`;
 }
 
+// REMAIN DAY/REMAIN TIME 칸에 넣을 데이터 막대 스타일을 계산한다. interval을 100%로 보고
+// 남은 비율만큼 파란 막대를 채운다(엑셀 원본의 데이터 막대 조건부 서식과 동일한 방식).
+function barStyle(remain, interval) {
+  if (remain === null || remain === undefined || isNaN(remain)) return '';
+  if (!interval || isNaN(interval) || interval <= 0) return '';
+  const pct = Math.max(0, Math.min(100, (remain / interval) * 100));
+  if (pct <= 0) return '';
+  return ` style="background: linear-gradient(to right, var(--databar) ${pct}%, transparent ${pct}%);"`;
+}
+
 function isoDate(d) {
   return d.toISOString().slice(0, 10);
 }
@@ -341,8 +351,8 @@ function renderContent() {
             <td>${ADMIN && r.performed_time_editable ? `<input type="text" placeholder="hhhh:mm" pattern="-?\\d+:[0-5]?\\d" class="cell-input" data-si="${si}" data-ri="${ri}" data-field="performed_time_hours" value="${r.performed_time_hours !== null && r.performed_time_hours !== undefined ? hoursToStr(r.performed_time_hours) : ''}">` : (ADMIN ? lockedCellHtml(r.performed_time, r.performed_time_ref) : escapeHtml(r.performed_time))}</td>
             <td>${escapeHtml(r.next_date)}</td>
             <td>${escapeHtml(r.next_time)}</td>
-            <td>${escapeHtml(r.remain_day)}</td>
-            <td>${escapeHtml(r.remain_time)}</td>
+            <td${barStyle(parseInt(r.remain_day, 10), r.interval_day_num || r.cargo_interval_days)}>${escapeHtml(r.remain_day)}</td>
+            <td${barStyle(parseHoursStr(r.remain_time), r.interval_time_hours)}>${escapeHtml(r.remain_time)}</td>
             <td class="remark">${ADMIN ? `<textarea rows="1" class="cell-input remark-input" data-si="${si}" data-ri="${ri}" data-field="remark">${escapeHtml(r.remark || '')}</textarea>` : escapeHtml(r.remark)}</td>
           </tr>`;
 
